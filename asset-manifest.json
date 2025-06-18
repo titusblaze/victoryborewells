@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/victoryborewells/static/css/main.423263e2.css",
+    "main.js": "/victoryborewells/static/js/main.d036960f.js",
+    "static/js/488.9c92ff38.chunk.js": "/victoryborewells/static/js/488.9c92ff38.chunk.js",
+    "static/media/logo.png": "/victoryborewells/static/media/logo.9acd9d39348d00dd45c8.png",
+    "static/media/logo.svg": "/victoryborewells/static/media/logo.6641b7d919a2179fef62ee2ef51d0829.svg",
+    "index.html": "/victoryborewells/index.html",
+    "main.423263e2.css.map": "/victoryborewells/static/css/main.423263e2.css.map",
+    "main.d036960f.js.map": "/victoryborewells/static/js/main.d036960f.js.map",
+    "488.9c92ff38.chunk.js.map": "/victoryborewells/static/js/488.9c92ff38.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.423263e2.css",
+    "static/js/main.d036960f.js"
+  ]
+}
