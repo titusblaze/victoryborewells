@@ -172,7 +172,7 @@ export const Navbar = () => {
         },
       }}
     >
-      Packages
+      About
     </Button>
         <Button onClick={scrollToTopicPackages}
       sx={{

@@ -52,7 +52,7 @@ function Example2() {
         bgcolor: 'white'
       }}
     >
-      <Typography variant="h5" gutterBottom sx={{fontWeight:'bold'}}> 
+      <Typography variant="h5" gutterBottom sx={{fontWeight:'bold',color:'#333232'}}> 
         Contact Us
       </Typography>
       <form onSubmit={sendEmail}>

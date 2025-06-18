@@ -70,7 +70,7 @@ const AutoNumberRunning = () => {
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '40px 0px' }}>
       <Box sx={{ width: isXs && isSm ? '90%' : '80%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f2f2f2', padding: '40px 0px' }}>
-        <Typography variant='h4' sx={{ fontSize: isXs && isSm ? '30px' : '40px', color: '#482e7a' }}>Our Strength</Typography>
+        <Typography variant='h4' sx={{ fontSize: isXs && isSm ? '30px' : '40px', color: '#333232' }}>Our Strength</Typography>
         <Box sx={{ width: '100%', display: 'flex', flexDirection: isXs && isSm ? 'column' : 'row', gap: '30px', justifyContent: 'center', alignItems: 'center', padding: '40px 0px' }}>
           {countersData.map((counter) => (
             <Counter
