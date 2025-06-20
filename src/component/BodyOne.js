@@ -7,7 +7,7 @@ import axios from "axios"
 const fetchData = async () => {
     try {
       // Example API URL for data (replace with your actual URL)
-      const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+      const response = await axios.get('https://script.google.com/macros/s/AKfycbzptX4BJSWz90_9_DrN-8zchhQgd3gdVRXIAiUiHYxUX84MHmvc6kbbtksSKCvy_2Y_/exec');
       return response.data; // Array of objects like the one you provided
     } catch (error) {
       console.error("Error fetching data:", error);
