@@ -53,7 +53,7 @@ function Example2() {
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
-        padding:'110px 60px 0 0'
+        padding:'110px 0'
       }}> 
       
       <Box sx={{width:{xs:'95%',md:'85%'}}}>
@@ -68,7 +68,7 @@ function Example2() {
     </Box>
       
         {/* Contact Person Card */}
-        <Box sx={{width:{xs:'95',md:'85%'},display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'30px',padding:'30px 0px'}}>
+        <Box sx={{width:{xs:'95%',md:'85%'},display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'30px',padding:'30px 0px'}}>
         {datas.map((data,index)=>(
             <Box sx={{width:{xs:'80%',md:'20%'},
                         display:'flex',
@@ -191,11 +191,11 @@ function Example2() {
       </Box>
               </Box>
               <Box sx={{
-                width:{xs:'95%',md:'50%'}, 
+                width:{xs:'95%',md:'45%'}, 
                 maxWidth: 500,
                 mx: 'auto',
                 mt: 5,
-               
+                
                 boxShadow: 3,
                 borderRadius: 2,
                 bgcolor: 'white'}}>
