@@ -4,15 +4,15 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
 const slides = [
   {
-    image: 'https://5.imimg.com/data5/EQ/TV/CE/SELLER-901529/borewell-drilling-rig-500x500.jpg',
+    image: 'https://i.im.ge/2025/06/21/JOeJ74.Borewell1.jpeg',
     text: 'Welcome to Our Services',
   },
   {
-    image: 'https://img77.uenicdn.com/image/upload/v1547216634/service_images/shutterstock_719795347.jpg',
+    image: 'https://i.im.ge/2025/06/21/JOenCC.Borewell2.jpeg',
     text: 'Quality Borewell Solutions',
   },
   {
-    image: 'https://blogger.googleusercontent.com/img/a/AVvXsEjW2X0KQ-nQJkqKKTxUu6HbItFUYAeVY5UkTI8HCoUIt5xKvF3ADlmeXBOG73dvS-S1bznVj3s8SXCDZVt28iuor55_c0F-xG0PjR-o9O6H70urwV9QG21YNhnsafcHcQObLkBF-tcl2sOSvKoizdXdu5AME7yrlNSMtbmjn3AfEjhI8fHhPi2op0rv-Q=s16000',
+    image: 'https://i.im.ge/2025/06/21/JOe4vq.Borewell3.jpeg',
     text: 'Contact Us for Consultation',
   },
 ];

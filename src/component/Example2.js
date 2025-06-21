@@ -195,7 +195,7 @@ function Example2() {
                 maxWidth: 500,
                 mx: 'auto',
                 mt: 5,
-                
+                p: 3,
                 boxShadow: 3,
                 borderRadius: 2,
                 bgcolor: 'white'}}>
