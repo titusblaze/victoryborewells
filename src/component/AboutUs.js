@@ -10,7 +10,8 @@ const AboutUs = () => {
         flexDirection:'column',
         backgroundColor:'#f5f5f5',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        padding:'110px 0'
     },
     TitleBox:{
         width:'85%',

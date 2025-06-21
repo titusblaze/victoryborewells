@@ -6,7 +6,7 @@ export const Body2 = () => {
 const imageUrl = 'https://www.shutterstock.com/image-photo/water-flowing-artesian-well-land-600nw-1472868881.jpg';
     
   return (
-    <Box id="services" sx={{width:'100%',position:'relative',display:'flex',flexDirection:'column',backgroundColor:'#f3f3f3', justifyContent:'center',alignItems:'center',padding:'100px 0px'}}>
+    <Box id="services" sx={{width:'100%',position:'relative',display:'flex',flexDirection:'column',backgroundColor:'#f3f3f3', justifyContent:'center',alignItems:'center',padding:'110px 0px'}}>
         <Typography sx={{fontSize:'30px', fontWeight:'bold',color:'#333232', marginBottom:'30px'}}>Our Services</Typography>
         <Box sx={{width:{xs:'95%',md:'85%'},display:'flex',flexDirection:{xs:'column',md:'row'},justifyContent:'center',gap:'20px'}}>
         <Box 

@@ -75,7 +75,7 @@ const Footer = () => {
     <Box sx={{width:'100%',display:'flex',flexDirection:'column',backgroundColor:'#5e4c48', paddingTop:'20px',alignItems:'center'}}>
     <Box sx={{width:'85%',display:'flex',flexDirection:{xs:'column',md:'row'}, justifyContent:'center', padding:'20px 0',gap:'20px'}}>
       <Box sx={{width:{xs:'90%',md:'20%'}, display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
-        <Avatar src='https://s.hs-data.com/bilder/spieler/gross/13029.jpg' sx={{width:{xs:'150px',md:'120px'},height:{xs:'150px',md:'120px'},justifyContent:'center',alignItems:'center'}}/>       
+        <Avatar src='https://drive.google.com/file/d/1HS8qH932eKV1XsxYcRLa4CEjOCFz1Ubm/view?usp=sharing' sx={{width:{xs:'150px',md:'120px'},height:{xs:'150px',md:'120px'},justifyContent:'center',alignItems:'center'}}/>       
         <Typography sx={{color:'white',fontSize:'15px'}}>Founder</Typography>
         <Typography sx={{color:'white',fontWeight:'bold'}}>Rajapandian</Typography>
       </Box>
