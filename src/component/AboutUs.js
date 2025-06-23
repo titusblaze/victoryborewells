@@ -60,10 +60,10 @@ const AboutUs = () => {
                 <Box sx={Style.ContentBox}>
                 <Typography style={Style.SubTitle}>Our Legacy</Typography>
                 <p style={Style.Paragraph}>
-                    Established in 2015, Victory Borewell has been a trusted provider of 
+                    Established in 1995, Victory Borewell has been a trusted provider of 
                     borewell drilling services, specializing in delivering reliable water 
                     solutions across Thoothukudi & Tirunelveli District Location Satankulam. 
-                    With over 10 years of experience, we have built a reputation for excellence, 
+                    With over 30 years of experience, we have built a reputation for excellence, 
                     safety, and customer satisfaction.
                 </p>
                 <Typography style={Style.SubTitle}>Our Services</Typography>

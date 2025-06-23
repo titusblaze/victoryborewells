@@ -1,6 +1,6 @@
-// Gallery.js
+// ImageGallery.js
 import React, { useState } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Link } from '@mui/material';
 import {
   
   Modal,
@@ -29,10 +29,10 @@ const videoList = [
 ];
 
 const liveVideo = [
-    {liveLink:'kjCa9Fb69AA'}
+    {liveLink:'kjCa9Fb69AA',display:'yes'}
 ]
 
-const Gallery = () => {
+const ImageGallery = () => {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -144,12 +144,14 @@ const Gallery = () => {
         </Box>
       </Modal>
     </>
+            {liveVideo.map((Link) => (
     
-        <Typography sx={{fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Live Video</Typography>
+        <Typography sx={{ display : Link.display === 'yes' ? 'flex' : 'none' ,fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Live Video</Typography>
 
+                            ))}
 
-        <Box sx={{width:{xs:'360px',md:'1385px'},height:{xs:'200px',md:'768px'}}}>
-            {liveVideo.map((Link, index) => (
+        {liveVideo.map((Link, index) => (
+        <Box sx={{display : Link.display === 'yes' ? 'flex' : 'none' , width:{xs:'360px',md:'1385px'},height:{xs:'200px',md:'768px'}}}>
             <iframe
                           src={`https://www.youtube.com/embed/${Link.liveLink}`}
                           title={Link.title}
@@ -164,8 +166,9 @@ const Gallery = () => {
                             height: '100%',
                           }}
                         />
-                            ))}
                             </Box>
+                            ))}
+
                         
                 <Typography sx={{fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Experience Video</Typography>
 
@@ -216,4 +219,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default ImageGallery;
