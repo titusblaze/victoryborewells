@@ -6,10 +6,10 @@ import EmergencyIcon from '@mui/icons-material/Emergency';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 
 const countersData = [
-  { id: 1, icon: <FaceRetouchingNaturalIcon fontSize="large" />, label: "Year of Experience", target: 10 },
-  { id: 2, icon: <ThumbUpIcon fontSize="large" />, label: "Successful Spots", target: 9990 },
+  { id: 1, icon: <FaceRetouchingNaturalIcon fontSize="large" />, label: "Year of Experience", target: 30 },
+  { id: 2, icon: <ThumbUpIcon fontSize="large" />, label: "Successful Spots", target: 3990 },
   { id: 3, icon: <EmergencyIcon fontSize="large" />, label: "Successfull Risk Spots", target: 260 },
-  { id: 4, icon: <VolunteerActivismIcon fontSize="large" />, label: "Years of Service and Cleaning", target: 2500 },
+  { id: 4, icon: <VolunteerActivismIcon fontSize="large" />, label: "Years of Service and Cleaning", target: 1500 },
 ];
 
 const Counter = ({ icon, label, target }) => {
