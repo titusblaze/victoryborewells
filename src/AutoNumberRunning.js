@@ -15,11 +15,7 @@ const countersData = [
 const Counter = ({ icon, label, target }) => {
   const [value, setValue] = useState(0);
 
-  // Media query........
-  const isXs = useMediaQuery('(max-width:600px)');
-  const isSm = useMediaQuery('(max-width:960px)');
-  const isMd = useMediaQuery('(max-width:1280px)');
-  const isLg = useMediaQuery('(max-width:1920px)');
+ 
 
 
   useEffect(() => {
@@ -39,7 +35,7 @@ const Counter = ({ icon, label, target }) => {
   return (
     <Box
       sx={{
-        width: isXs && isSm ? '75%' : '17%',
+        width: {xs: '75%', md: '17%'},
         textAlign: "center",
         boxShadow: 3,
         borderRadius: 2,
@@ -61,17 +57,12 @@ const Counter = ({ icon, label, target }) => {
   )
 }
 const AutoNumberRunning = () => {
-  // Media query........
-  const isXs = useMediaQuery('(max-width:600px)');
-  const isSm = useMediaQuery('(max-width:960px)');
-  const isMd = useMediaQuery('(max-width:1280px)');
-  const isLg = useMediaQuery('(max-width:1920px)');
 
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '40px 0px' }}>
-      <Box sx={{ width: isXs && isSm ? '90%' : '80%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f2f2f2', padding: '40px 0px' }}>
-        <Typography variant='h4' sx={{ fontSize: isXs && isSm ? '30px' : '40px', color: '#333232' }}>Our Strength</Typography>
-        <Box sx={{ width: '100%', display: 'flex', flexDirection: isXs && isSm ? 'column' : 'row', gap: '30px', justifyContent: 'center', alignItems: 'center', padding: '40px 0px' }}>
+      <Box sx={{ width: {xs: '90%', md: '80%'}, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f2f2f2', padding: '40px 0px' }}>
+        <Typography variant='h4' sx={{ fontSize: {xs: '30px', md: '40px'}, color: '#333232' }}>Our Strength</Typography>
+        <Box sx={{ width: '100%', display: 'flex', flexDirection: {xs: 'column', md : 'row'}, gap: '30px', justifyContent: 'center', alignItems: 'center', padding: '40px 0px' }}>
           {countersData.map((counter) => (
             <Counter
               key={counter.id}
