@@ -9,6 +9,7 @@ import Example2 from './component/Example2';
 import AboutUs from './component/AboutUs';
 import AutoNumberRunning from './AutoNumberRunning';
 import ImageSlider from './component/ImageSlider';
+import Gallery from './component/Gallery';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Navbar/>
       <ImageSlider/>
       <AboutUs/>
+      <Gallery/>
       <BodyOne/>
       <Body2/>
       <Example2/>
