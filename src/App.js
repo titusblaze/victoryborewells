@@ -10,6 +10,7 @@ import AboutUs from './component/AboutUs';
 import AutoNumberRunning from './AutoNumberRunning';
 import ImageSlider from './component/ImageSlider';
 import Gallery from './component/Gallery';
+import GoogleReview from './component/GoogleReview';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Body2/>
       <Example2/>
       <AutoNumberRunning/>
+      <GoogleReview/>
       <ScrollupIcon/> 
       <Footer/>
       
