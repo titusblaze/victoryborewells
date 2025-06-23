@@ -11,6 +11,7 @@ import AutoNumberRunning from './AutoNumberRunning';
 import ImageSlider from './component/ImageSlider';
 import Gallery from './component/Gallery';
 import GoogleReview from './component/GoogleReview';
+import Payment from './component/Payment';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Body2/>
       <Example2/>
       <AutoNumberRunning/>
+      <Payment/>
       <GoogleReview/>
       <ScrollupIcon/> 
       <Footer/>
