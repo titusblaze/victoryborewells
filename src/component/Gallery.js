@@ -1,4 +1,4 @@
-// ImageGallery.js
+// Gallery.js
 import React, { useState } from 'react';
 import { Grid, Link } from '@mui/material';
 import {
@@ -32,7 +32,7 @@ const liveVideo = [
     {liveLink:'kjCa9Fb69AA',display:'yes'}
 ]
 
-const ImageGallery = () => {
+const Gallery = () => {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -219,4 +219,4 @@ const ImageGallery = () => {
   );
 };
 
-export default ImageGallery;
+export default Gallery;

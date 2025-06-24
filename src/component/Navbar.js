@@ -1,11 +1,58 @@
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import React, { useState }  from 'react'
-import { Drawer, Box, Button, Typography, IconButton, ButtonGroup} from '@mui/material';
+import { Drawer, Box, Button, AppBar, Toolbar, Typography, IconButton, ButtonGroup} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
+
 
 export const Navbar = () => {
+
+  const Style={
+    NavButton:{
+        height:'80px',
+        display:{
+          xs:'none',
+          sm:'none',
+          md:'flex',
+          lg:'flex'
+        },
+        position: 'relative', // Required for positioning the border
+        //padding: '10px 20px', // Padding for the button
+        fontSize: '16px', // Font size for the button text
+        textTransform: 'none', // Prevent uppercase text
+        border: '2px solid transparent', // Invisible border for the effect
+        color: 'white', // Initial text color
+        fontWeight: '700', // Font weight
+        overflow: 'hidden', // To ensure the border animation stays within the button
+
+        // Pseudo-element for the top border animation
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '2px', // Height of the top border
+          backgroundColor: '#FF6200', // Color of the top border orange
+          transform: 'scaleX(0)', // Initially, the top border is hidden (scaleX(0))
+          transformOrigin: 'bottom left', // Animation from right to left
+          transition: 'transform 0.4s ease', // Smooth animation for the top border
+        },
+
+        // Hover effect for top border and text color
+        '&:hover': {
+          color: '#FF6200', // Change text color to red on hover
+        },
+        
+        '&:hover::before': {
+          transform: 'scaleX(1)', // On hover, expand the top border to full width
+          transformOrigin: 'bottom left', // Animation from left to right
+        },
+           
+    },
+  }
 
   
   const [isClicked, setIsClicked] = useState(false);
@@ -129,217 +176,18 @@ export const Navbar = () => {
         alignItems:'center',
         gap:'10px'
       }}>
-        <Button onClick={scrollToTopicAbout}
-      sx={{
-        height:'80px',
-        display:{
-          xs:'none',
-          sm:'none',
-          md:'flex',
-          lg:'flex'
-        },
-        position: 'relative', // Required for positioning the border
-        //padding: '10px 20px', // Padding for the button
-        fontSize: '16px', // Font size for the button text
-        textTransform: 'none', // Prevent uppercase text
-        border: '2px solid transparent', // Invisible border for the effect
-        color: 'white', // Initial text color
-        fontWeight: '700', // Font weight
-        overflow: 'hidden', // To ensure the border animation stays within the button
-
-        // Pseudo-element for the top border animation
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '2px', // Height of the top border
-          backgroundColor: '#FF6200', // Color of the top border orange
-          transform: 'scaleX(0)', // Initially, the top border is hidden (scaleX(0))
-          transformOrigin: 'bottom left', // Animation from right to left
-          transition: 'transform 0.4s ease', // Smooth animation for the top border
-        },
-
-        // Hover effect for top border and text color
-        '&:hover': {
-          color: '#FF6200', // Change text color to red on hover
-        },
-        
-        '&:hover::before': {
-          transform: 'scaleX(1)', // On hover, expand the top border to full width
-          transformOrigin: 'bottom left', // Animation from left to right
-        },
-      }}
-    >
-      About
-    </Button>
-        <Button onClick={scrollToTopicPackages}
-      sx={{
-        height:'80px',
-        display:{
-          xs:'none',
-          sm:'none',
-          md:'flex',
-          lg:'flex'
-        },
-        position: 'relative', // Required for positioning the border
-        //padding: '10px 20px', // Padding for the button
-        fontSize: '16px', // Font size for the button text
-        textTransform: 'none', // Prevent uppercase text
-        border: '2px solid transparent', // Invisible border for the effect
-        color: 'white', // Initial text color
-        fontWeight: '700', // Font weight
-        overflow: 'hidden', // To ensure the border animation stays within the button
-
-        // Pseudo-element for the top border animation
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '2px', // Height of the top border
-          backgroundColor: '#FF6200', // Color of the top border orange
-          transform: 'scaleX(0)', // Initially, the top border is hidden (scaleX(0))
-          transformOrigin: 'bottom left', // Animation from right to left
-          transition: 'transform 0.4s ease', // Smooth animation for the top border
-        },
-
-        // Hover effect for top border and text color
-        '&:hover': {
-          color: '#FF6200', // Change text color to red on hover
-        },
-        
-        '&:hover::before': {
-          transform: 'scaleX(1)', // On hover, expand the top border to full width
-          transformOrigin: 'bottom left', // Animation from left to right
-        },
-      }}
-    >
-      Packages
-    </Button>
-    <Button onClick={scrollToTopicServices}
-      sx={{
-        display:{
-          xs:'none',
-          sm:'none',
-          md:'flex',
-          lg:'flex'
-        },
-        height:'80px',
-        position: 'relative', // Required for positioning the border
-        //padding: '10px 20px', // Padding for the button
-        fontSize: '16px', // Font size for the button text
-        textTransform: 'none', // Prevent uppercase text
-        border: '2px solid transparent', // Invisible border for the effect
-        color: 'white', // Initial text color
-        fontWeight: '700', // Font weight
-        overflow: 'hidden', // To ensure the border animation stays within the button
-
-        // Pseudo-element for the top border animation
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '2px', // Height of the top border
-          backgroundColor: '#FF6200', // Color of the top border
-          transform: 'scaleX(0)', // Initially, the top border is hidden (scaleX(0))
-          transformOrigin: 'bottom left', // Animation from right to left
-          transition: 'transform 0.4s ease', // Smooth animation for the top border
-        },
-
-        // Hover effect for top border and text color
-        '&:hover': {
-          color: '#FF6200', // Change text color to red on hover
-        },
-        
-        '&:hover::before': {
-          transform: 'scaleX(1)', // On hover, expand the top border to full width
-          transformOrigin: 'bottom left', // Animation from left to right
-        },
-      }}
-    >
-      Services
-    </Button>
-    <Button onClick={scrollToTopicContact}
-      sx={{
-        display:{
-          xs:'none',
-          sm:'none',
-          md:'flex',
-          lg:'flex'
-        },
-        height:'80px',
-        position: 'relative', // Required for positioning the border
-        //padding: '10px 20px', // Padding for the button
-        fontSize: '16px', // Font size for the button text
-        textTransform: 'none', // Prevent uppercase text
-        border: '2px solid transparent', // Invisible border for the effect
-        color: 'white', // Initial text color
-        fontWeight: '700', // Font weight
-        overflow: 'hidden', // To ensure the border animation stays within the button
-
-        // Pseudo-element for the top border animation
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '2px', // Height of the top border
-          backgroundColor: '#FF6200', // Color of the top border
-          transform: 'scaleX(0)', // Initially, the top border is hidden (scaleX(0))
-          transformOrigin: 'bottom left', // Animation from right to left
-          transition: 'transform 0.4s ease', // Smooth animation for the top border
-        },
-
-        // Hover effect for top border and text color
-        '&:hover': {
-          color: '#FF6200', // Change text color to red on hover
-        },
-        
-        '&:hover::before': {
-          transform: 'scaleX(1)', // On hover, expand the top border to full width
-          transformOrigin: 'bottom left', // Animation from left to right
-        },
-      }}
-    >
-      Contact
-    </Button>
-    <Button href="tel:9788112233"
-      sx={{
-        display:{
-          xs:'none',
-          sm:'none',
-          md:'flex',
-          lg:'flex'
-        },
-        height:'50px',
-        position: 'relative', // Required for positioning the border
-        padding: '10px 20px', // Padding for the button
-        fontSize: '16px', // Font size for the button text
-        textTransform: 'none', // Prevent uppercase text
-        backgroundColor:'#545252',
-        gap:'10px',
-        color: 'white', // Initial text color
-        fontWeight: '700', // Font weight
-        
-
-        
-
-        // Hover effect for top border and text color
-        '&:hover': {
-          backgroundColor: 'green', // Change text color to red on hover
-        },
-        
-        
-      }}
-    >
-      <LocalPhoneIcon/> 9788112233
-    </Button>
+        <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          My App
+        </Typography>
+        <Box>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/about">About</Button>
+          <Button color="inherit" component={Link} to="/contact">Contact</Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
     <IconButton 
     sx={{
       display:{
