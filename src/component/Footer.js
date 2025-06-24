@@ -77,7 +77,7 @@ const Footer = () => {
       <Box sx={{width:{xs:'90%',md:'20%'}, display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
         <Avatar src='https://i.im.ge/2025/06/21/JOepeD.Rajapandian.jpeg' sx={{width:{xs:'150px',md:'120px'},height:{xs:'150px',md:'120px'},justifyContent:'center',alignItems:'center'}}/>       
         <Typography sx={{color:'white',fontSize:'15px'}}>Founder</Typography>
-        <Typography sx={{color:'white',fontWeight:'bold'}}>Rajapandian</Typography>
+        <Typography sx={{color:'white',fontWeight:'bold'}}>N. Velayutham</Typography>
       </Box>
       <Box sx={{width:{xs:'90%',md:'30%'},display:'flex',flexDirection:'column'}}>
         <Typography sx={{textAlign:'left',fontWeight:'bold',color:'white'}}>About Us</Typography>

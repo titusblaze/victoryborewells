@@ -15,6 +15,9 @@ const slides = [
     image: 'https://i.im.ge/2025/06/21/JOe4vq.Borewell3.jpeg',
     text: 'Contact Us for Consultation',
   },
+  {
+    image: 'https://i.im.ge/2025/06/24/J2v7Hx.BorewellVehicle.jpeg',
+  },
 ];
 
 const ImageSlider = () => {
