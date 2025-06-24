@@ -1,11 +1,9 @@
-import { Box, Typography } from '@mui/material'
+import { Avatar, Box, Typography } from '@mui/material'
 import React from 'react'
 import ImageSlider from './ImageSlider'
 import Gallery from './Gallery'
-import AutoNumberRunning from ',/AutoNumberRunning'
 import GoogleReview from './GoogleReview'
-import Footer from './Footer'
-
+import AutoNumberRunning from '../AutoNumberRunning'
 const Home = () => {
   return (
     <Box>
@@ -26,7 +24,6 @@ const Home = () => {
         <Gallery/>
         <AutoNumberRunning/>
         <GoogleReview/>
-        <Footer/>
     </Box>
   )
 }

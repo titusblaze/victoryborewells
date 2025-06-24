@@ -176,18 +176,15 @@ export const Navbar = () => {
         alignItems:'center',
         gap:'10px'
       }}>
-        <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          My App
-        </Typography>
-        <Box>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/about">About</Button>
-          <Button color="inherit" component={Link} to="/contact">Contact</Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
+        
+        
+          <Button  component={Link} to="/"           sx={Style.NavButton}>Home</Button>
+          <Button  component={Link} to="/about"      sx={Style.NavButton}>About</Button>
+          <Button  component={Link} to="/packages"   sx={Style.NavButton}>Packages</Button>
+          <Button  component={Link} to="/contact"    sx={Style.NavButton}>Contact</Button>
+          <Button  component={Link} to="/payment"    sx={Style.NavButton}>Payment</Button>
+        
+      
     <IconButton 
     sx={{
       display:{
@@ -234,19 +231,23 @@ export const Navbar = () => {
           </Button>
 
           {/* Drawer Content */}
-          <Button onClick={scrollToTopicAbout} 
+          <Button component={Link} to="/"  
+          variant="h6" sx={{
+                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Home</Button>
+          <Button component={Link} to="/about"            
           variant="h6" sx={{
                                 color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>About</Button>
-          <Button onClick={scrollToTopicPackages} 
-          variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Packages</Button>
 
-          <Button onClick={scrollToTopicServices}
+          <Button component={Link} to="/packages"
            variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Services</Button>
-          <Button onClick={scrollToTopicContact}
+                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Packages</Button>
+          <Button component={Link} to="/contact"
            variant="h6" sx={{
                                 color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Contact</Button>
+          <Button component={Link} to="/payment"
+           variant="h6" sx={{
+                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Payment</Button>
+                                
         </Box>
       </Drawer>
 

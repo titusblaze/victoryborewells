@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Fab, IconButton } from '@mui/material';
+import { Box, Fab, IconButton } from '@mui/material';
 import TrendingFlatOutlinedIcon from '@mui/icons-material/TrendingFlatOutlined';
 
 function ScrollupIcon() {

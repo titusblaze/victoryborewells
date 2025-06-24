@@ -1,4 +1,5 @@
 import React from 'react'
+import { Body2 } from './Body2'
 import {Box, List, ListItem, Typography} from '@mui/material'
 
 const AboutUs = () => {
@@ -131,6 +132,7 @@ const AboutUs = () => {
                     </Box>
 
         </Box>
+        <Body2/>
     </Box>
   )
 }

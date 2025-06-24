@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './component/Navbar';
+import Home from './component/Home';
 import { Body2 } from './component/Body2';
 import { BodyOne } from './component/BodyOne';
 import Footer from './component/Footer';
@@ -18,16 +20,14 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <ImageSlider/>
-      <AboutUs/>
-      <Gallery/>
-      <BodyOne/>
-      <Body2/>
-      <Example2/>
-      <AutoNumberRunning/>
-      <Payment/>
-      <GoogleReview/>
-      <ScrollupIcon/> 
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/about" element={<AboutUs/>} />
+        <Route path="/packages" element={<BodyOne/>} />
+        <Route path="/contact" element={<Example2/>} />
+        <Route path="/payment" element={<Payment/>} />
+      </Routes> 
+      <ScrollupIcon/>
       <Footer/>
       
       
