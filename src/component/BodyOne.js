@@ -1,5 +1,6 @@
 import EastIcon from '@mui/icons-material/East';
-import { Box, Typography, TableBody, TableCell, TableContainer, TableRow, Paper, Table, TableHead, Button, Container, CircularProgress } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Typography, TableBody, TableCell, TableContainer, TableRow, Paper, Table, TableHead, Button, Container, CircularProgress, Dialog, DialogTitle, IconButton, DialogContent, TextField, DialogActions } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
 
@@ -7,7 +8,7 @@ import axios from "axios"
 const fetchData = async () => {
     try {
       // Example API URL for data (replace with your actual URL)
-      const response = await axios.get('https://script.google.com/macros/s/AKfycbzptX4BJSWz90_9_DrN-8zchhQgd3gdVRXIAiUiHYxUX84MHmvc6kbbtksSKCvy_2Y_/exec');
+      const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
       return response.data; // Array of objects like the one you provided
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -20,6 +21,14 @@ export const BodyOne = () => {
     const [data, setData] = useState([]); // Store fetched data
   const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null); // Track error state
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile:'',
+    location: '',
+    email:'',
+    message: ''
+  });
 
   useEffect(() => {
     const loadData = async () => {
@@ -64,6 +73,29 @@ export const BodyOne = () => {
       left: 0,
       behavior: 'smooth',  // Smooth scroll
     });
+  };
+
+  //Dialouge Box Form Data
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev,[name]: value }));
+  };
+
+  const sendWhatsApp = () => {
+    const message = `Name: ${formData.name}\nPhone Number: ${formData.mobile} \nLocation: ${formData.location}\nEmail: ${formData.email}Message: ${formData.message}`;
+    const phoneNumber = '+919788112233'; // Your WhatsApp number (with country code) 9788112233
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Data:', formData);
+    // You can add API call here
+    handleClose();
   };
       
   return (
@@ -140,19 +172,100 @@ export const BodyOne = () => {
                         </TableBody>
                     </Table>
                     </TableContainer>
-                    <Button onClick={handleScrollUp}
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                    <Button onClick={handleOpen}
                     sx={{
                         display:'flex',justifyContent:'left',textDecoration:'none',fontWeight:'700',gap:'5px',color:'#322826',
-                        '&:hover':{textDecoration:'underline',color:'#FF6200',backgroundColor:'transparent'}
+                        '&:hover':{color:'#FF6200',backgroundColor:'transparent'}
                     }}>
-                        <EastIcon sx={{width:'15px'}}/>Book Now
+                        <EastIcon sx={{width:'15px'}}/>Get Quote
                     </Button>
+                    <Button href='tel:+919788112233'
+                    sx={{
+                        display:'flex',justifyContent:'left',textDecoration:'none',fontWeight:'700',gap:'5px',color:'#322826',
+                        '&:hover':{color:'#FF6200',backgroundColor:'transparent'}
+                    }}>
+                        Call Now
+                    </Button>
+                </Box>
                 </Box>
 
 
             </Box>
             ))}
         </Box>
+        <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>
+          Contact Us
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{ position: 'absolute', right: 8, top: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+
+        <form onSubmit={handleSubmit}>
+          <DialogContent dividers>
+            <TextField
+              margin="dense"
+              label="Name"
+              type="text"
+              name="name"
+              fullWidth
+              required
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="dense"
+              label="Mobile"
+              type="number"
+              name="mobile"
+              fullWidth
+              required
+              value={formData.mobile}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="dense"
+              label="Location"
+              type="location"
+              name="location"
+              fullWidth
+              //required
+              value={formData.location}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="dense"
+              label="Email"
+              type="email"
+              name="email"
+              fullWidth
+              //required
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="dense"
+              label="Message your Requirements"
+              name="message"
+              multiline
+              rows={4}
+              fullWidth
+              required
+              value={formData.message}
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" variant="contained" onClick={sendWhatsApp}>Send</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </Box>
   )
 }

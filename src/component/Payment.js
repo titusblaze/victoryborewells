@@ -15,7 +15,7 @@ const Payment = () => {
 
   // Array of UPI IDs
     const upiLinks = [
-      { id: 1, label: 'VICTORY RIG SERVICE', upi: 'victoryrigservice-2@okhgfcbank' },
+      { id: 1, label: 'VICTORY RIG SERVICE', upi: 'victoryrigservice-2@okhdfcbank' },
       { id: 2, label: 'VICTORY RIG SERVICE', upi: '9788112233-3@ybl' },
       { id: 3, label: 'VICTORY RIG SERVICE', upi: '9788112233-3@ibl' },
       { id: 3, label: 'VICTORY RIG SERVICE', upi: '9788112233-3@axl' },
