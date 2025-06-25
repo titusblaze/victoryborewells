@@ -1,6 +1,6 @@
 // Gallery.js
 import React, { useState } from 'react';
-import { Grid, Link } from '@mui/material';
+import { CircularProgress, Container, Grid, Link } from '@mui/material';
 import {
   
   Modal,
@@ -11,28 +11,28 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-const images = [
-  { url: 'https://i.im.ge/2025/06/21/JOeJ74.Borewell1.jpeg', caption: 'Image 1' },
-  { url: 'https://i.im.ge/2025/06/21/JOenCC.Borewell2.jpeg', caption: 'Image 2' },
-  { url: 'https://i.im.ge/2025/06/21/JOe4vq.Borewell3.jpeg', caption: 'Image 3' },
-  { url: 'https://i.im.ge/2025/06/21/JOenCC.Borewell2.jpeg', caption: 'Image 4' },
-  { url: 'https://i.im.ge/2025/06/21/JOe4vq.Borewell3.jpeg', caption: 'Image 5' },
-  { url: 'https://i.im.ge/2025/06/21/JOeJ74.Borewell1.jpeg', caption: 'Image 6' },
-];
-const videoList = [
-  { id: 'dQw4w9WgXcQ', title: 'Never Gonna Give You Up' },
-  { id: 'kJQP7kiw5Fk', title: 'Despacito' },
-  { id: '3JZ_D3ELwOQ', title: 'Shape of You' },
-  { id: 'RgKAFK5djSk', title: 'See You Again' },
-  { id: 'e-ORhEE9VVg', title: 'Blank Space' },
-];
-
-const liveVideo = [
-    {liveLink:'kjCa9Fb69AA',display:'yes'}
-]
+const fetchData = async () => {
+  const response = await axios.get(
+    'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk'
+  );
+  return response.data;
+};
 
 const Gallery = () => {
+
+  const { data = [], isLoading, error } = useQuery({
+    queryKey: ['victoryborewellData'],
+    queryFn: fetchData,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const filteredData1 = data.filter((item) => item.Id === 3);
+  const filteredData2 = data.filter((item) => item.Id === 4);
+  const filteredData3 = data.filter((item) => item.Id === 5);
+
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -46,12 +46,46 @@ const Gallery = () => {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === filteredData1.length - 1 ? 0 : prev + 1));
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? filteredData1.length - 1 : prev - 1));
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <Container>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  // Error state
+  if (error || filteredData1.length === 0) {
+    return (
+      <Container>
+        <Typography color="error">Failed to fetch or no data available.</Typography>
+      </Container>
+    );
+  }
+  // Error state
+  if (error || filteredData2.length === 0) {
+    return (
+      <Container>
+        <Typography color="error">Failed to fetch or no data available.</Typography>
+      </Container>
+    );
+  }
+  // Error state
+  if (error || filteredData3.length === 0) {
+    return (
+      <Container>
+        <Typography color="error">Failed to fetch or no data available.</Typography>
+      </Container>
+    );
+  }
 
   return (
     <Box sx={{width:'100%', display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',paddind:'110px 0'}}>
@@ -59,12 +93,12 @@ const Gallery = () => {
         <Typography sx={{fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Photos</Typography>
     <>
       <Grid container spacing={2} padding={2}>
-        {images.map((img, index) => (
+        {filteredData1.map((img, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Box
               component="img"
-              src={img.url}
-              alt={img.caption}
+              src={img.link}
+              alt={img.LabelText}
               onClick={() => handleOpen(index)}
               sx={{
                 width: '100%',
@@ -120,8 +154,8 @@ const Gallery = () => {
 
             <Box
               component="img"
-              src={images[currentIndex].url}
-              alt={images[currentIndex].caption}
+              src={filteredData1[currentIndex].link}
+              alt={filteredData1[currentIndex].LabelText}
               sx={{
                 width: '100%',
                 maxHeight: '80vh',
@@ -139,21 +173,21 @@ const Gallery = () => {
           </Box>
 
           <Typography variant="h6" mt={2}>
-            {images[currentIndex].caption} ({currentIndex + 1}/{images.length})
+            {filteredData1[currentIndex].LabelText} ({currentIndex + 1}/{filteredData1.length})
           </Typography>
         </Box>
       </Modal>
     </>
-            {liveVideo.map((Link) => (
+            {filteredData2.map((Link) => (
     
-        <Typography sx={{ display : Link.display === 'yes' ? 'flex' : 'none' ,fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Live Video</Typography>
+        <Typography sx={{ display : Link.LabelText === 'yes' ? 'flex' : 'none' ,fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Live Video</Typography>
 
                             ))}
 
-        {liveVideo.map((Link, index) => (
-        <Box sx={{display : Link.display === 'yes' ? 'flex' : 'none' , width:{xs:'360px',md:'1385px'},height:{xs:'200px',md:'768px'}}}>
+        {filteredData2.map((Link) => (
+        <Box sx={{display : Link.LabelText === 'yes' ? 'flex' : 'none' , width:{xs:'360px',md:'1385px'},height:{xs:'200px',md:'768px'}}}>
             <iframe
-                          src={`https://www.youtube.com/embed/${Link.liveLink}`}
+                          src={`https://www.youtube.com/embed/${Link.link}`}
                           title={Link.title}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -174,7 +208,7 @@ const Gallery = () => {
 
         
             <Grid container spacing={3} padding={3}>
-                  {videoList.map((video, index) => (
+                  {filteredData3.map((video, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
                       <Box
                         sx={{
@@ -192,7 +226,7 @@ const Gallery = () => {
                         }}
                       >
                         <iframe
-                          src={`https://www.youtube.com/embed/${video.id}`}
+                          src={`https://www.youtube.com/embed/${video.link}`}
                           title={video.title}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -208,7 +242,7 @@ const Gallery = () => {
                         />
                       </Box>
                       <Typography variant="subtitle1" textAlign="center">
-                        {video.title}
+                        {video.LabelText}
                       </Typography>
                     </Grid>
                   ))}

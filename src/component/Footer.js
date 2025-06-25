@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import { Avatar, Box,Button,IconButton,Link,Typography } from '@mui/material';
+import { Avatar, Box,Button,IconButton,Typography } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -8,6 +8,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
+
 
 
 const Footer = () => {
@@ -86,32 +88,23 @@ const Footer = () => {
           </Typography>
       </Box>
       <Box sx={{width:{xs:'90%',md:'15%'},display:'flex',flexDirection:'column'}}>
-        <Typography sx={{fontWeight:'bold',textAlign:'left',color:'white'}}>Link</Typography>
-        <Link onClick={scrollToTopicBanner} 
-          variant="h6" sx={{color:'white',textAlign:'left', fontSize:'15px', textDecoration:'none',
-                                '&:hover':{color:'blue',backgroundColor:'transparent'}}}>
-                                  Home
-                                  </Link>
-        <Link onClick={scrollToTopicAbout} 
-          variant="h6" sx={{color:'white',textAlign:'left', fontSize:'15px', textDecoration:'none',
-                                '&:hover':{color:'blue',backgroundColor:'transparent'}}}>
-                                  About
-                                  </Link>
-        <Link onClick={scrollToTopicPackages} 
-          variant="h6" sx={{color:'white',textAlign:'left', fontSize:'15px', textDecoration:'none',
-                                '&:hover':{color:'blue',backgroundColor:'transparent'}}}>
-                                  Packages
-                                  </Link>
-        <Link onClick={scrollToTopicServices} 
-          variant="h6" sx={{color:'white',textAlign:'left', fontSize:'15px', textDecoration:'none',
-                                '&:hover':{color:'blue',backgroundColor:'transparent'}}}>
-                                  Services
-                                  </Link>
-        <Link onClick={scrollToTopicContact} 
-          variant="h6" sx={{color:'white',textAlign:'left', fontSize:'15px', textDecoration:'none',
-                                '&:hover':{color:'blue',backgroundColor:'transparent'}}}>
-                                  Contact Us
-                                  </Link>
+        <Typography sx={{fontWeight:'bold',textAlign:'left',color:'white',fontSize:'20px'}}>Link</Typography>
+        <Link component={Link} to="/"  
+          variant="h6" style={{
+                                color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Home</Link>
+          <Link component={Link} to="/about"            
+          variant="h6" style={{
+                                color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>About</Link>
+
+          <Link component={Link} to="/packages"
+           variant="h6" style={{
+                                color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Packages</Link>
+          <Link component={Link} to="/contact"
+           variant="h6" style={{
+                                color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Contact</Link>
+          <Link component={Link} to="/payment"
+           variant="h6" style={{
+                                color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Payment</Link>
       </Box>
       <Box sx={{width:{xs:'90%',md:'25%'},display:'flex',flexDirection:'column'}}>
         <Typography sx={{textAlign:'left',fontWeight:'bold',color:'white'}}>Contact Us</Typography>
@@ -119,7 +112,7 @@ const Footer = () => {
         <IconButton href="tel:+919788112233" color="white">
           <PhoneIcon sx={{color:'white'}}/>
         </IconButton>
-        <Link href="tel:+919788112233" sx={{marginTop:'9px', color:'white'}}>
+        <Link href="tel:+919788112233" style={{marginTop:'9px', color:'white'}}>
           +91 97881 12233
         </Link>
         </Box>
@@ -127,7 +120,7 @@ const Footer = () => {
           <IconButton href="mailto:info@example.com">
           <EmailIcon sx={{color:'white'}}/>
         </IconButton>
-        <Link href="mailto:info@example.com" sx={{ marginTop:'9px', color:'white'}}>
+        <Link href="mailto:info@example.com" style={{ marginTop:'9px', color:'white'}}>
           info@example.com
         </Link>
         </Box>
@@ -142,7 +135,7 @@ const Footer = () => {
         <Link
           href="https://maps.app.goo.gl/8smHNCg28wwgX6yV8"
           target="_blank"
-          sx={{ color:'white', textAlign:'left' }}
+          style={{ color:'white', textAlign:'left' }}
         >
           Nazareth Main Rd, opp. State bank of india, Sathankulam, Tamil Nadu - 628 704
         </Link>

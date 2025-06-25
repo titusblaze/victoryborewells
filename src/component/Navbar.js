@@ -3,6 +3,10 @@ import React, { useState }  from 'react'
 import { Drawer, Box, Button, AppBar, Toolbar, Typography, IconButton, ButtonGroup} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
@@ -183,7 +187,7 @@ export const Navbar = () => {
           <Button  component={Link} to="/packages"   sx={Style.NavButton}>Packages</Button>
           <Button  component={Link} to="/contact"    sx={Style.NavButton}>Contact</Button>
           <Button  component={Link} to="/payment"    sx={Style.NavButton}>Payment</Button>
-        
+          <Button  href='tel:919788112233' sx={{backgroundColor:'green', color:'white',display:{xs:'none',md:'flex'},'&:hover':{backgroundColor:'#FF6200'}}}> <LocalPhoneIcon/> </Button>
       
     <IconButton 
     sx={{
@@ -198,7 +202,7 @@ export const Navbar = () => {
     }}
     variant="contained" color="orange" 
     onClick={() => toggleDrawer(true)}>
-        <MenuIcon sx={{color:'orange'}}/>
+        <MenuIcon sx={{color:'#FF6200'}}/>
       </IconButton>
 
       {/* Drawer Component */}
@@ -215,6 +219,8 @@ export const Navbar = () => {
             flexDirection: 'column',
             alignItems: 'flex-start',
             padding: 2,
+            backgroundColor:'#23160e',
+            gap:'20px'
           }}
         >
           {/* Close Button */}
@@ -227,26 +233,55 @@ export const Navbar = () => {
               marginBottom: 2,
             }}
           >
-            <CloseIcon />
+            <CloseIcon sx={{color:'#FF6200'}}/>
           </Button>
 
           {/* Drawer Content */}
           <Button component={Link} to="/"  
           variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Home</Button>
+                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Home</Button>
           <Button component={Link} to="/about"            
           variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>About</Button>
+                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>About</Button>
 
           <Button component={Link} to="/packages"
            variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Packages</Button>
+                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Packages</Button>
           <Button component={Link} to="/contact"
            variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Contact</Button>
+                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Contact</Button>
           <Button component={Link} to="/payment"
            variant="h6" sx={{
-                                color:'black','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Payment</Button>
+                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Payment</Button>
+
+          
+          <Box sx={{display:'flex',flexWrap:'wrap', alignItems:'center',gap:'20px', borderTop:'2px solid #FF6200',paddingTop:'30px'}}>
+        <IconButton 
+            href="https://facebook.com"
+          target="_blank"
+            sx={{width:'50px', height:'50px'}}>
+            <FacebookIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
+          </IconButton>
+          <IconButton 
+            href="https://www.instagram.com"
+          target="_blank"
+            sx={{width:'50px', height:'50px'}}>
+            <InstagramIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
+          </IconButton>
+        <IconButton 
+            href="https://twitter.com"
+          target="_blank"
+            sx={{width:'50px', height:'50px'}}>
+            <TwitterIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
+          </IconButton>
+        <IconButton 
+            href="https://www.youtube.com"
+          target="_blank"
+            sx={{width:'50px', height:'50px'}}>
+            <YouTubeIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
+          </IconButton>
+
+      </Box>
                                 
         </Box>
       </Drawer>

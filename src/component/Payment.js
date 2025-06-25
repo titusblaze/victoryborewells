@@ -40,7 +40,7 @@ const Payment = () => {
                         <Typography sx={{fontSize:'40px',fontWeight:'bold',color:'black',fontStyle:'italic',padding:'20px 0'}}>PAYMENT <span style={{fontSize:'20px',color:'#C70808'}}>GATE WAY</span> </Typography>
         </Box>
         <Box sx={{width:{xs:'95%',md:'80%'},display:'flex',flexDirection:{xs:'column', md:'row',justifyContent:'center', alignItems:'center', gap:'30px'}}}>
-    <Box textAlign="center" mt={5}>
+    <Box textAlign="center" mt={5} sx={{width:{xs:'90%',md:'50%'}}}>
       <Typography variant="h5" gutterBottom>
         Pay with UPI
       </Typography>
@@ -67,7 +67,7 @@ const Payment = () => {
       </Button>
     </Box>
     {/* //Copy UPI Id */}
-                    <Box mt={4} mx="auto" maxWidth={600}>
+                    <Box mt={4} mx="auto" maxWidth={600} sx={{width:{xs:'90%',md:'50%'}}}>
       <Typography variant="h5" gutterBottom textAlign="center">
         Copy UPI IDs
       </Typography>

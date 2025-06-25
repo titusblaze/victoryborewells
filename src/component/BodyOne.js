@@ -2,50 +2,52 @@ import EastIcon from '@mui/icons-material/East';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Typography, TableBody, TableCell, TableContainer, TableRow, Paper, Table, TableHead, Button, Container, CircularProgress, Dialog, DialogTitle, IconButton, DialogContent, TextField, DialogActions } from '@mui/material'
 import React, { useState, useEffect } from 'react'
-import axios from "axios"
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-// Sample function to fetch data from an API
 const fetchData = async () => {
-    try {
-      // Example API URL for data (replace with your actual URL)
-      const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
-      return response.data; // Array of objects like the one you provided
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw new Error("Error fetching data");
-    }
-  };
-export const BodyOne = () => {
+  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+  return response.data;
+};
 
-    //API Fecthing
-    const [data, setData] = useState([]); // Store fetched data
-  const [loading, setLoading] = useState(true); // Track loading state
-  const [error, setError] = useState(null); // Track error state
+export const BodyOne = () => {
+  const { data = [], isLoading, error } = useQuery({
+    queryKey: ['borewellData'],
+    queryFn: fetchData,
+    staleTime: 1000 * 60 * 5, // cache for 5 minutes
+  });
+
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    mobile:'',
+    mobile: '',
     location: '',
-    email:'',
+    email: '',
     message: ''
   });
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const apiData = await fetchData(); // Fetch data from API
-        setData(apiData); // Set fetched data into state
-        setLoading(false); // Set loading to false after data is fetched
-      } catch (err) {
-        setError("Failed to fetch data."); // Set error state if fetching fails
-        setLoading(false);
-      }
-    };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    loadData(); // Fetch data when component mounts
-  }, []); // Empty dependency array ensures the effect runs only once
+  const sendWhatsApp = () => {
+    const message = `Name: ${formData.name}\nPhone Number: ${formData.mobile} \nLocation: ${formData.location}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+    const phoneNumber = '+919788112233';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
 
-  if (loading) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Data:', formData);
+    handleClose();
+  };
+
+  // Handle loading and error
+  if (isLoading) {
     return (
       <Container>
         <CircularProgress />
@@ -56,57 +58,86 @@ export const BodyOne = () => {
   if (error) {
     return (
       <Container>
-        <Typography color="error">{error}</Typography>
+        <Typography color="error">Failed to fetch data.</Typography>
       </Container>
     );
   }
 
-  // Filter data based on userId (only for userId === 1 in this case)
-  const filteredData1 = data.filter((item) => item.Id === 1);
-
-    
-    // Function to handle the scroll up
-  const handleScrollUp = () => {
-    // Scroll to the top of the page with smooth behavior
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',  // Smooth scroll
-    });
-  };
-
-  //Dialouge Box Form Data
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev,[name]: value }));
-  };
-
-  const sendWhatsApp = () => {
-    const message = `Name: ${formData.name}\nPhone Number: ${formData.mobile} \nLocation: ${formData.location}\nEmail: ${formData.email}Message: ${formData.message}`;
-    const phoneNumber = '+919788112233'; // Your WhatsApp number (with country code) 9788112233
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-    // You can add API call here
-    handleClose();
-  };
+  const filteredData1 = data.filter((item) => item.Id === 7);
+  const filteredData2 = data.filter((item) => item.Id === 8);
       
   return (
-    <Box id="packages" sx={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'110px 0px',gap:'20px'}}>
-        <Typography variant='h6' sx={{color:'#333232',fontFamily:'sans-serif', fontWeight:'700'}}>Find the Right option for Your Needs!</Typography>
-        <Typography variant='h3' sx={{color:'#333232',fontFamily:'sans-serif', fontWeight:'bold'}}>Most Popular Borewell Bit</Typography>
-
+    <Box id="packages" sx={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',gap:'20px'}}>
+           
+           {filteredData1.map((item)=>(
+      <Box
+      sx={{
+        height: { xs: 'auto', md: '100vh' },
+        width: '100%',
+        backgroundImage: `url(${item.link})`, // Replace with your image
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        flexDirection:'column-reverse',
+       // justifyContent: 'center',
+       // alignItems: 'center',
+        marginTop: { xs: '60px', md: '80px' },
+        position: 'relative',
+        color: '#ffffff',
+        
+      }}>
+        {/* Optional: Overlay dark background */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        }}
+      />
+      <Box 
+          sx={{ 
+                height:{xs:'200px'},
+                display: 'flex',
+                position:'relative',
+                flexDirection:'column',
+                justifyContent:{md:'center'},
+                alignItems:{ms:'center'},
+                top: {xs:90,md:0},
+                paddingBottom:{xs:'0px',md:'100px'} 
+                }}>
+        <Typography
+          className="fade-in fade-in-1"
+          sx={{ fontWeight: 'bold',fontSize:{xs:'25px',md:'60px'},}}
+        >
+          {item.LabelText}
+        </Typography>
+        <Typography
+          className="fade-in fade-in-2"
+          sx={{ fontSize:{xs:'15px',md:'40px'}  }}
+        >
+          {item.LabelText1}
+        </Typography>
+        <Typography
+          className="fade-in fade-in-3"
+          sx={{ fontSize:{xs:'15px',md:'40px'} }}
+        >
+          {item.LabelText2}
+        </Typography>
+      </Box>
+    </Box>
+          ))}
+          {filteredData1.map((item)=>(
+        <Typography variant='h6' sx={{color:'#333232',fontFamily:'sans-serif', fontWeight:'700'}}>{item.Title}</Typography> ))}
+        {filteredData1.map((item)=>(
+        <Typography variant='h3' sx={{color:'#333232',fontFamily:'sans-serif', fontWeight:'bold', fontSize:{xs:'30px'}}}>{item.Title1}</Typography> ))}
+          
         <Box sx={{width:'90%',display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center',padding:'50px 0px',gap:'20px'}}>
             
         
-           {filteredData1.map((item)=>(
+           {filteredData2.map((item)=>(
                         
                     
             <Box key={item.id}
@@ -269,50 +300,4 @@ export const BodyOne = () => {
     </Box>
   )
 }
-
-const itemData = [
-    {   id:'1',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/vitamin-b-12.png',
-        subheading:'Vitamin B12',
-        r1c2:'Blood Sample (3 ml Serum in Gel Tube)',
-        r2c2:'NA',
-        r3c2:'Measures the amount of vitamin B12 in your blood.'
-    },
-    {   id:'2',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/cbc.png',
-        subheading:'Complete Blood Count',
-        r1c2:'Blood Sample (3 ml whole blood in EDTA Vacutainer)',
-        r2c2:'NA',
-        r3c2:'Evaluate overall health and detect abnormalities'
-
-    },
-    {   id:'3',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/thyriod-profile.png',
-        subheading:'Thyroid Profile',
-        r1c2:'Blood Sample (3 ml serum in Gel Tube)',
-        r2c2:'8-10 hours of fasting required',
-        r3c2:'To assess the functioning of the thyroid gland'
-    },
-    {   id:'4',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/HbA1C.png',
-        subheading:'HbA1C',
-        r1c2:'Blood Sample (3 ml whole blood in EDTA vacutainer)',
-        r2c2:'NA',
-        r3c2:'Diagnose prediabetes and diabetes, and is also the main test to help you and your health care team manage your diabetes'
-    },
-    {   id:'5',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/vitamin-d.png',
-        subheading:'Vitamin D',
-        r1c2:'Blood Sample (3 ml serum in Gel Tube)',
-        r2c2:'NA',
-        r3c2:'Enhance awareness about "Vitamin D" benefits, encourage its incorporation into daily diets, and promote overall health and well-being'
-    },
-    {   id:'6',
-        iconimage:'http://uat.lupindiagnostics.com/assets/google/home-collection/images/icons/lipid.png',
-        subheading:'Lipid Profile',
-        r1c2:'Blood Sample (3 ml serum in Gel Tube)',
-        r2c2:'NA',
-        r3c2:'The lipid profile aims to evaluate cholesterol levels, triglycerides, and lipoproteins to assess cardiovascular health     accurately'
-    },
-
-]
+export default BodyOne;
