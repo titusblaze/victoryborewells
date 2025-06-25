@@ -285,10 +285,10 @@ export const Navbar = () => {
                     }}
                   >
                     <Box
-                      sx={{
+                      sx={{width:'100%',
                         display: 'flex',
                         whiteSpace: 'nowrap',
-                        animation: 'scroll-left 20s linear infinite',
+                        animation: {xs:'scroll-left 10s linear infinite',md:'scroll-left 20s linear infinite'},
                       }}
                     >
                         <Typography
