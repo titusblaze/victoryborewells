@@ -6,7 +6,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const Payment = () => {
   const upiId = '9788112233-3@ybl';
   const upiUrl = encodeURI(
-    `upi://pay?pa=${upiId}&pn=Victory+Borewells&tn=Service+Payment&am=100&cu=INR`
+    `upi://pay?pa=${upiId}&pn=Victory+Borewells&tn=Service+Payment&cu=INR`
   );
 
   const handleQrClick = () => {
