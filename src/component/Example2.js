@@ -5,6 +5,7 @@ import emailjs from 'emailjs-com';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -38,9 +39,14 @@ function Example2() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const filteredData3 = data.filter((item) => item.Id === 12);
+  const filteredItem = data.find((item) => item.Id === 12);
   const sendEmail = (e) => {
     e.preventDefault();
+    const { name, mobile, email, message } = formData;
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:${filteredItem?.Email}?subject=${subject}&body=${body}`
     emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
       .then(() => {
         alert('Email sent successfully!');
@@ -52,7 +58,7 @@ function Example2() {
 
   const sendWhatsApp = () => {
     const message = `Name: ${formData.name}\nPhone Number: ${formData.mobile} \nEmail: ${formData.email}\nMessage: ${formData.message}`;
-    const phoneNumber = '+919788112233'; // Your WhatsApp number (with country code)
+    const phoneNumber = `+91${filteredItem?.Phone}`; // Your WhatsApp number (with country code)
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
@@ -252,16 +258,17 @@ function Example2() {
                       />
                       
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                        <Button variant="contained" color="primary" type="submit" onClick={sendEmail} sx={{display:'none'}}>
-                          Submit to Email
+                        <Button variant="contained" color="primary" type="submit" onClick={sendEmail} sx={{gap:'10px',}}>
+                          Send <MailIcon/>
                         </Button>
                         <Button variant="outlined"  onClick={sendWhatsApp}
                         sx={{
                           backgroundColor:'green',
                           color:'white',
-                          '&:hover':{backgroundColor:'#e3eade',}
+                          gap:'10px',
+                          '&:hover':{backgroundColor:'#2AA61C',}
                         }}>
-                          Send via WhatsApp
+                          Send <WhatsAppIcon/>
                         </Button>
                       </Box>
                     </form>

@@ -1,6 +1,6 @@
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import React, { useState }  from 'react'
-import { Drawer, Box, Button, AppBar, Toolbar, Typography, IconButton, ButtonGroup} from '@mui/material';
+import { Drawer, Box, Button, AppBar, Toolbar, Typography, IconButton, ButtonGroup, Container, CircularProgress} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -9,9 +9,21 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchData = async () => {
+  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+  return response.data;
+};
 
 
 export const Navbar = () => {
+  const { data = [], isLoading, error } = useQuery({
+        queryKey: ['borewellData'],
+        queryFn: fetchData,
+        staleTime: 1000 * 60 * 5, // cache for 5 minutes
+      });
 
   const Style={
     NavButton:{
@@ -122,6 +134,26 @@ export const Navbar = () => {
       behavior: 'smooth',  // Smooth scroll
     });
   };
+  // Handle loading and error
+      if (isLoading) {
+        return (
+          <Container>
+            <CircularProgress />
+          </Container>
+        );
+      }
+    
+      if (error) {
+        return (
+          <Container>
+            <Typography color="error">Failed to fetch data.</Typography>
+          </Container>
+        );
+      }
+    
+      const filteredData = data.filter((item) => item.Id === 1);
+      const filteredData1 = data.filter((item) => item.Id === 12);
+      const filteredData2 = data.filter((item) => item.Id === 13);
    
   return (
     <Box sx={{  width:'100%',
@@ -164,8 +196,20 @@ export const Navbar = () => {
         justifyContent:'left',
         alignItems:'center'
       }}>
-           <img src= {logo} alt='logo' style={{width:'60px ', height:'auto'}} />
+        <Link to="/" style={{ textDecoration: 'none' }}>
+           <Box
+                component="img"
+                src={logo}
+                alt="logo"
+                sx={{
+                  width: { xs: '40px', md: '50px' },   // Smaller on mobile, larger on desktop
+                  height: 'auto',
+                  p: { xs: '10px' },         // Responsive padding
+                }}
+              />
+              </Link>
         </Box>
+        
 
         <Box sx={{
          width: {
@@ -187,8 +231,9 @@ export const Navbar = () => {
           <Button  component={Link} to="/packages"   sx={Style.NavButton}>Packages</Button>
           <Button  component={Link} to="/contact"    sx={Style.NavButton}>Contact</Button>
           <Button  component={Link} to="/payment"    sx={Style.NavButton}>Payment</Button>
-          <Button  href='tel:919788112233' sx={{backgroundColor:'green', color:'white',display:{xs:'none',md:'flex'},'&:hover':{backgroundColor:'#FF6200'}}}> <LocalPhoneIcon/> </Button>
-      
+          {filteredData1.map((item) => (
+          <Button  href={`tel:91${item.Phone}`} sx={{backgroundColor:'green', color:'white',display:{xs:'none',md:'flex'},'&:hover':{backgroundColor:'#FF6200'}}}> <LocalPhoneIcon/> </Button>
+            ))}
     <IconButton 
     sx={{
       display:{
@@ -197,10 +242,10 @@ export const Navbar = () => {
         md:'none',
         lg:'none'
       },
-      width:'50%'
+      width:'20%'
       
     }}
-    variant="contained" color="orange" 
+    variant="contained"  
     onClick={() => toggleDrawer(true)}>
         <MenuIcon sx={{color:'#FF6200'}}/>
       </IconButton>
@@ -255,31 +300,24 @@ export const Navbar = () => {
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Payment</Button>
 
           
-          <Box sx={{display:'flex',flexWrap:'wrap', alignItems:'center',gap:'20px', borderTop:'2px solid #FF6200',paddingTop:'30px'}}>
-        <IconButton 
-            href="https://facebook.com"
-          target="_blank"
-            sx={{width:'50px', height:'50px'}}>
-            <FacebookIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
-          </IconButton>
-          <IconButton 
-            href="https://www.instagram.com"
-          target="_blank"
-            sx={{width:'50px', height:'50px'}}>
-            <InstagramIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
-          </IconButton>
-        <IconButton 
-            href="https://twitter.com"
-          target="_blank"
-            sx={{width:'50px', height:'50px'}}>
-            <TwitterIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
-          </IconButton>
-        <IconButton 
-            href="https://www.youtube.com"
-          target="_blank"
-            sx={{width:'50px', height:'50px'}}>
-            <YouTubeIcon sx={{color:'#FF6200', width:'50px',height:'50px'}}/>
-          </IconButton>
+          <Box sx={{display:'flex',flexWrap:'wrap', alignItems:'center',gap:'10px', borderTop:'2px solid #FF6200',paddingTop:'30px'}}>
+        
+        {filteredData2.map((item)=>(
+                
+                <IconButton
+                component="a"
+                href={item.mlink}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ padding: 1 }}
+              >
+                <img
+                  src={item.link} 
+                  alt="Facebook"
+                  style={{ width: 32, height: 32 }}
+                />
+              </IconButton>
+                   ))}
 
       </Box>
                                 
@@ -319,23 +357,30 @@ export const Navbar = () => {
                       padding: {xs:'0px',md:'8px 0'},
                     }}
                   >
+                    {filteredData.map((item) => (
                     <Box
-                      sx={{width:'100%',
-                        display: 'flex',
-                        whiteSpace: 'nowrap',
-                        animation: {xs:'scroll-left 10s linear infinite',md:'scroll-left 20s linear infinite'},
-                      }}
-                    >
+                        sx={{
+                          display: 'inline-block',
+                          whiteSpace: 'nowrap',
+                          gap:'20px',
+                          animation: {
+                            xs: 'scroll-left 20s linear infinite',
+                            md: 'scroll-left 20s linear infinite',
+                          },
+                        }}
+                      >
                         <Typography
                           sx={{
                             paddingRight: '50px',
-                            fontSize: {sx:'1rem',md:'1.2rem'},
+                            fontSize: { xs: '1rem', md: '1.2rem' }, // Fixed typo
                             fontWeight: 'bold',
-                          }}
-                        >
-                          "May the favor of the Lord our God rest upon us; establish the work of our hands for us – yes, establish the work of our hands.” Psalm 90:17
+                            fontStyle: 'italic',
+                            
+                          }}>
+                          {item.link}
                         </Typography>
-                    </Box>
+                      </Box>
+                    ))}
                   </Box>
 
     </Box>

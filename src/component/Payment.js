@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button,TextField,Grid,Snackbar, } from '@mui/material';
+import { Box, Typography, Button,TextField,Grid,Snackbar, Container, CircularProgress, } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchData = async () => {
+  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+  return response.data;
+};
 
 
 const Payment = () => {
-  const upiId = '9788112233-3@ybl';
+  const { data = [], isLoading, error } = useQuery({
+      queryKey: ['borewellData'],
+      queryFn: fetchData,
+      staleTime: 1000 * 60 * 5, // cache for 5 minutes
+    });
+   
+
+  const filteredData = data.filter((item) => item.Id === 14);
+  const filteredItem = data.find((item) => item.Id === 14);
+  const upiId = filteredItem?.LabelText1;
+  ////////////
+  // const upiId = '9788112233-3@ybl';
+
   const upiUrl = encodeURI(
     `upi://pay?pa=${upiId}&pn=Victory+Borewells&tn=Service+Payment&cu=INR`
   );
@@ -28,6 +47,22 @@ const Payment = () => {
         setCopied(true);
       });
     };
+     // Handle loading and error
+  if (isLoading) {
+    return (
+      <Container>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Typography color="error">Failed to fetch data.</Typography>
+      </Container>
+    );
+  }
 
   return (
     <Box sx={{width:'100%',display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center',padding:'60px 0'}}>
@@ -73,14 +108,14 @@ const Payment = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        {upiLinks.map((item) => (
+        {filteredData.map((item) => (
           <Grid item xs={12} key={item.id}>
             <Box display="flex" alignItems="center" gap={2}>
               <TextField
                 fullWidth
                 variant="outlined"
-                label={item.label}
-                value={item.upi}
+                label={item.LabelText}
+                value={item.link}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -88,7 +123,7 @@ const Payment = () => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => handleCopy(item.upi)}
+                onClick={() => handleCopy(item.link)}
                 startIcon={<ContentCopyIcon />}
               >
                 Copy

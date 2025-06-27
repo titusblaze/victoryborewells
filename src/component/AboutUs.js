@@ -1,8 +1,31 @@
 import React from 'react'
 import { Body2 } from './Body2'
-import {Box, List, ListItem, Typography} from '@mui/material'
+import {Box, CircularProgress, Container, List, ListItem, Typography} from '@mui/material'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchData = async () => {
+  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+  return response.data;
+};
 
 const AboutUs = () => {
+
+    const { data = [], isLoading, error } = useQuery({
+              queryKey: ['borewellData'],
+              queryFn: fetchData,
+              staleTime: 1000 * 60 * 5, // cache for 5 minutes
+            });
+        const filteredData = data.filter((item) => item.Id === 16);
+        const filteredItem = data.find((item) => item.Id === 15);
+        const subHeading1 = filteredItem?.SubHeading1;
+        const paragraph = filteredItem?.Paragraph;
+        const SubHeading2 = filteredItem?.SubHeading2;
+        const paragraph2 = filteredItem?.Paragraph2;
+        const SubHeading3 = filteredItem?.SubHeading3;
+        const paragraph3 = filteredItem?.Paragraph3;
+        const SubHeading4 = filteredItem?.SubHeading4;
+        const paragraph4 = filteredItem?.Paragraph4;
   
   const Style={
     Container:{
@@ -51,6 +74,22 @@ const AboutUs = () => {
     }
 
   }
+  // Handle loading and error
+      if (isLoading) {
+        return (
+          <Container>
+            <CircularProgress />
+          </Container>
+        );
+      }
+    
+      if (error) {
+        return (
+          <Container>
+            <Typography color="error">Failed to fetch data.</Typography>
+          </Container>
+        );
+      }
 
     return (
     <Box id="about" sx={Style.Container}>
@@ -59,71 +98,39 @@ const AboutUs = () => {
                 About Us
                 </Typography>
                 <Box sx={Style.ContentBox}>
-                <Typography style={Style.SubTitle}>Our Legacy</Typography>
+                <Typography style={Style.SubTitle}>{subHeading1}</Typography>
                 <p style={Style.Paragraph}>
-                    Established in 1995, Victory Borewell has been a trusted provider of 
-                    borewell drilling services, specializing in delivering reliable water 
-                    solutions across Thoothukudi & Tirunelveli District Location Satankulam. 
-                    With over 30 years of experience, we have built a reputation for excellence, 
-                    safety, and customer satisfaction.
+                    {paragraph}
                 </p>
-                <Typography style={Style.SubTitle}>Our Services</Typography>
+                <Typography style={Style.SubTitle}>{SubHeading2}</Typography>
                 <p style={Style.Paragraph}>
-                    We offer a comprehensive range of services to meet diverse water needs: 
+                    {paragraph2} 
                     </p>
                     <List style={Style.ListStyle}>
+                        {filteredData.map((item) => (
                         <ListItem style={Style.ListItemStyle}>
-                            Borewell Drilling: Utilizing advanced rigs and techniques to drill borewells 
-                            of varying depths and diameters.
+                            {item.Paragraph2}
                         </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Borewell Cleaning & Maintenance: Ensuring optimal performance and longevity of 
-                            existing borewells.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Pump Installation & Repair: Providing installation and maintenance services for 
-                            submersible and openwell pumps.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Water Survey & Consultation: Conducting geophysical surveys to assess groundwater 
-                            availability and quality.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Rainwater Harvesting Solutions: Designing and implementing systems to conserve and 
-                            utilize rainwater effectively. 
-                        </ListItem>
+                        ))}
+                        
                     </List>
-                    <Typography style={Style.SubTitle}>Our Mission</Typography>
+                    <Typography style={Style.SubTitle}>{SubHeading3}</Typography>
                         <p style={Style.Paragraph}>
-                             To provide sustainable and efficient water solutions that meet the needs of our clients, 
-                             ensuring access to clean and reliable water sources.  
+                             {paragraph3}  
                                 </p>
-                    <Typography style={Style.SubTitle}>Our Vision</Typography>
+                    <Typography style={Style.SubTitle}>{SubHeading4}</Typography>
                         <p style={Style.Paragraph}>
-                             To be recognized as a leading borewell service provider, known for our commitment to quality, 
-                             innovation, and customer satisfaction.   
+                             {paragraph4}   
                                 </p>
                     <Typography style={Style.SubTitle}>Why Choose Us?</Typography>
                     
                     <List style={Style.ListStyle}>
+                        {filteredData.map((item) => (
                         <ListItem style={Style.ListItemStyle}>
-                            Experienced Team: Our team comprises skilled professionals with extensive 
-                            experience in the borewell industry.
+                            {item.Paragraph5}
                         </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Advanced Equipment: We employ state-of-the-art drilling rigs and technology 
-                            to deliver precise and efficient services.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Customer-Centric Approach: We prioritize customer satisfaction, offering tailored 
-                            solutions to meet specific requirements.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Timely Execution: We adhere to project timelines, ensuring prompt and efficient service delivery.
-                        </ListItem>
-                        <ListItem style={Style.ListItemStyle}>
-                            Competitive Pricing: Our services are priced competitively, offering value without compromising on quality. 
-                        </ListItem>
+                        ))}
+                        
                     </List>
                     
 

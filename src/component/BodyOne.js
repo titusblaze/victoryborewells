@@ -32,14 +32,17 @@ export const BodyOne = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
+  const filteredData3 = data.filter((item) => item.Id === 12);
+  const filteredItem = data.find((item) => item.Id === 12);
   const sendWhatsApp = () => {
     const message = `Name: ${formData.name}\nPhone Number: ${formData.mobile} \nLocation: ${formData.location}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
-    const phoneNumber = '+919788112233';
+    // const phoneNumber = '+919788112233';
+    //const upiId = filteredItem?.LabelText1;
+    const phoneNumber = `+91${filteredItem?.Phone}`
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
@@ -211,13 +214,15 @@ export const BodyOne = () => {
                     }}>
                         <EastIcon sx={{width:'15px'}}/>Get Quote
                     </Button>
-                    <Button href='tel:+919788112233'
+                    {filteredData3.map((item) => (
+                    <Button href={`tel:+91${item.Phone}`}
                     sx={{
                         display:'flex',justifyContent:'left',textDecoration:'none',fontWeight:'700',gap:'5px',color:'#322826',
                         '&:hover':{color:'#FF6200',backgroundColor:'transparent'}
                     }}>
                         Call Now
                     </Button>
+                    ))}
                 </Box>
                 </Box>
 

@@ -1,25 +1,53 @@
-import { Avatar, Box, Typography } from '@mui/material'
+import { Avatar, Box, CircularProgress, Container, Typography } from '@mui/material'
 import React from 'react'
 import ImageSlider from './ImageSlider'
 import Gallery from './Gallery'
 import GoogleReview from './GoogleReview'
 import AutoNumberRunning from '../AutoNumberRunning'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchData = async () => {
+  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
+  return response.data;
+};
+
 const Home = () => {
+   const { data = [], isLoading, error } = useQuery({
+      queryKey: ['borewellData'],
+      queryFn: fetchData,
+      staleTime: 1000 * 60 * 5, // cache for 5 minutes
+    });
+    // Handle loading and error
+  if (isLoading) {
+    return (
+      <Container>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Typography color="error">Failed to fetch data.</Typography>
+      </Container>
+    );
+  }
+
+  const filteredData = data.filter((item) => item.Id === 22);
   return (
     <Box>
         <ImageSlider/>
         <Box sx={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyItems:'center',padding:'60px 0'}}>
         <Typography sx={{fontSize:{xs:'30px',md:'50px'}}}>About Us</Typography>
+        {filteredData.map((item) => (
         <Box sx={{width:{xs:'95%',md:'85%'},display:'flex',flexDirection:{xs:'column',md:'row'},alignItems:'center',justifyItems:'center',gap:'30px'}}>
-        <p>We are a trusted borewell drilling company with years of expertise in 
-            providing reliable and efficient water well solutions. Specializing in residential, 
-            agricultural, and industrial borewell services, we use advanced machinery to ensure 
-            precise and timely work. Customer satisfaction and safety are our top priorities. 
-            Our team of skilled professionals is committed to delivering quality service tailored 
-            to your location and water needs. Choose us for dependable and long-lasting borewell solutions.</p>
-        <Avatar src='https://i.im.ge/2025/06/21/JOepeD.Rajapandian.jpeg' 
+        <p style={{textAlign:'left'}}>{item.LabelText}</p>
+        <Avatar src={item.link} 
         sx={{width:{xs:'150px',md:'120px'},height:{xs:'150px',md:'120px'},justifyContent:'center',alignItems:'center'}}/>
         </Box>
+        ))}
         </Box>
         <Gallery/>
         <AutoNumberRunning/>
