@@ -53,40 +53,8 @@ const Gallery = () => {
     setCurrentIndex((prev) => (prev === 0 ? filteredData1.length - 1 : prev - 1));
   };
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <Container>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
-  // Error state
-  if (error || filteredData1.length === 0) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch or no data available.</Typography>
-      </Container>
-    );
-  }
-  // Error state
-  if (error || filteredData2.length === 0) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch or no data available.</Typography>
-      </Container>
-    );
-  }
-  // Error state
-  if (error || filteredData3.length === 0) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch or no data available.</Typography>
-      </Container>
-    );
-  }
-
+  
+  
   return (
     <Box sx={{width:'100%', display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',paddind:'110px 0'}}>
         <Typography sx={{fontSize:{xs:'30px',md:'50px'},fontWeight:'bold',color:'#322826',padding:'15px 0'}}>Gallery</Typography>

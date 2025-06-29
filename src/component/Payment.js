@@ -47,22 +47,7 @@ const Payment = () => {
         setCopied(true);
       });
     };
-     // Handle loading and error
-  if (isLoading) {
-    return (
-      <Container>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch data.</Typography>
-      </Container>
-    );
-  }
+     
 
   return (
     <Box sx={{width:'100%',display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center',padding:'60px 0'}}>

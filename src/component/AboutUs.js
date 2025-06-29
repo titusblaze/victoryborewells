@@ -35,7 +35,7 @@ const AboutUs = () => {
         backgroundColor:'#f5f5f5',
         alignItems:'center',
         justifyContent:'center',
-        padding:'110px 0'
+        paddingTop:'110px'
     },
     TitleBox:{
         width:'85%',
@@ -60,7 +60,7 @@ const AboutUs = () => {
     },
     Paragraph:{
         display:'flex',
-        textAlign:'left',
+        textAlign:'justify',
         marginLeft:'20px',
 
     },
@@ -70,26 +70,13 @@ const AboutUs = () => {
         marginLeft:'40px'
     },
     ListItemStyle:{
-        display: 'list-item'
+        display: 'list-item',
+        textAlign:'justify',
+
     }
 
   }
-  // Handle loading and error
-      if (isLoading) {
-        return (
-          <Container>
-            <CircularProgress />
-          </Container>
-        );
-      }
-    
-      if (error) {
-        return (
-          <Container>
-            <Typography color="error">Failed to fetch data.</Typography>
-          </Container>
-        );
-      }
+  
 
     return (
     <Box id="about" sx={Style.Container}>

@@ -22,85 +22,25 @@ const fetchData = async () => {
 const Footer = () => {
 
   const { data = [], isLoading, error } = useQuery({
-      queryKey: ['borewellData'],
+      queryKey: ['victoryborewellData'],
       queryFn: fetchData,
       staleTime: 1000 * 60 * 5, // cache for 5 minutes
     });
 
   const [isClicked, setIsClicked] = useState(false);
-    const scrollToTopicBanner = () => {
-      setIsClicked(true); // Toggle click state <a>
-      // Find the target section by ID and scroll to it
-      const targetSection = document.getElementById("banner");
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // Smooth scroll
-          block: 'start',     // Align to the top of the section
-        });
-      }
-    };
-    const scrollToTopicAbout = () => {
-      setIsClicked(true); // Toggle click state <a>
-      // Find the target section by ID and scroll to it
-      const targetSection = document.getElementById("about");
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // Smooth scroll
-          block: 'start',     // Align to the top of the section
-        });
-      }
-    };
-    const scrollToTopicPackages = () => {
-      setIsClicked(true); // Toggle click state <a>
-      // Find the target section by ID and scroll to it
-      const targetSection = document.getElementById("packages");
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // Smooth scroll
-          block: 'start',     // Align to the top of the section
-        });
-      }
-    };
-    const scrollToTopicServices = () => {
-      setIsClicked(true); // Toggle click state <a>
-      // Find the target section by ID and scroll to it
-      const targetSection = document.getElementById("services");
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // Smooth scroll
-          block: 'start',     // Align to the top of the section
-        });
-      }
-    };
-    const scrollToTopicContact = () => {
-      setIsClicked(true); // Toggle click state <a>
-      // Find the target section by ID and scroll to it
-      const targetSection = document.getElementById("contact");
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // Smooth scroll
-          block: 'start',     // Align to the top of the section
-        });
-      }
-    };
-
-
-    // Handle loading and error
-      if (isLoading) {
-        return (
-          <Container>
-            <CircularProgress />
-          </Container>
-        );
-      }
     
-      if (error) {
-        return (
-          <Container>
-            <Typography color="error">Failed to fetch data.</Typography>
-          </Container>
-        );
-      }
+  const handleScrollUp = () => {
+    // Scroll to the top of the page with smooth behavior
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',  // Smooth scroll
+    });
+  };
+    
+
+
+    
     
       const filteredData1 = data.filter((item) => item.Id === 12);
       const filteredData2 = data.filter((item) => item.Id === 13);
@@ -129,30 +69,30 @@ const Footer = () => {
       <Box sx={{width:{xs:'90%',md:'15%'},display:'flex',flexDirection:'column',gap:'8px'}}>
         <Typography sx={{fontWeight:'bold',textAlign:'left',color:'white',fontSize:'20px'}}>Link</Typography>
         <Link component={Link} to="/"  
-          variant="h6" style={{
+          variant="h6" onClick={handleScrollUp} style={{
                                 color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Home</Link>
           <Link component={Link} to="/about"            
-          variant="h6" style={{
+          variant="h6" onClick={handleScrollUp} style={{
                                 color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>About</Link>
 
           <Link component={Link} to="/packages"
-           variant="h6" style={{
+           variant="h6" onClick={handleScrollUp} style={{
                                 color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Packages</Link>
           <Link component={Link} to="/contact"
-           variant="h6" style={{
+           variant="h6" onClick={handleScrollUp} style={{
                                 color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Contact</Link>
           <Link component={Link} to="/payment"
-           variant="h6" style={{
+           variant="h6" onClick={handleScrollUp} style={{
                                 color:'white',textAlign:'left',textDecoration:'none','&:hover':{color:'#632c76',backgroundColor:'transparent'}}}>Payment</Link>
       </Box>
            {filteredData1.map((item)=>(
       <Box sx={{width:{xs:'90%',md:'30%'},display:'flex',flexDirection:'column'}}>
         <Typography sx={{textAlign:'left',fontWeight:'bold',color:'white',fontSize:'20px'}}>Head Office</Typography>
         <Box sx={{display:'flex',flexDirection:'row'}}>
-        <IconButton href={`tel:91${item.Phone}`} color="white">
+        <IconButton href={`tel:+91${item.Phone}`} color="white">
           <PhoneIcon sx={{color:'white'}}/>
         </IconButton>
-        <Link href={`tel:91${item.Phone}`} style={{marginTop:'9px', color:'white'}}>
+        <Link href={`tel:+91${item.Phone}`} style={{marginTop:'9px', color:'white', textDecoration:'none'}}>
           +91 {item.Phone}
         </Link>
         </Box>
@@ -160,7 +100,7 @@ const Footer = () => {
           <IconButton href={`mailto:${item.Email}`}>
           <EmailIcon sx={{color:'white'}}/>
         </IconButton>
-        <Link href={`mailto:${item.Email}`} style={{ marginTop:'6px', color:'white'}}>
+        <Link href={`mailto:${item.Email}`} style={{ marginTop:'6px', color:'white', textDecoration:'none'}}>
           {item.Email}
         </Link>
         </Box>
@@ -175,7 +115,7 @@ const Footer = () => {
         <Link
           href={item.Location}
           target="_blank"
-          style={{ color:'white', textAlign:'left' }}
+          style={{ color:'white', textAlign:'left' , textDecoration:'none'}}
         >
           {item.LabelText2}
         </Link>
@@ -206,7 +146,7 @@ const Footer = () => {
       </Box>
     </Box>
     <Box sx={{width:'100%',height:{sm:'70px',md:'50px'},display:'flex',backgroundColor:'#322826',justifyContent:'center',alignItems:'center',marginBottom:{xs:'45px',sm:'45px',md:'0px'}}}>
-        <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',color:'white'}}>Copyright © 2025 Victory Borewells. All Rights Reserved.</Typography>
+        <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',color:'white',fontSize:{xs:'13px'}}}>Copyright © 2025 Victory Borewells. All Rights Reserved.</Typography>
         
         </Box>
       </Box>

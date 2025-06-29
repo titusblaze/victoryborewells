@@ -18,22 +18,6 @@ const Home = () => {
       queryFn: fetchData,
       staleTime: 1000 * 60 * 5, // cache for 5 minutes
     });
-    // Handle loading and error
-  if (isLoading) {
-    return (
-      <Container>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch data.</Typography>
-      </Container>
-    );
-  }
 
   const filteredData = data.filter((item) => item.Id === 22);
   return (
@@ -42,8 +26,8 @@ const Home = () => {
         <Box sx={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyItems:'center',padding:'60px 0'}}>
         <Typography sx={{fontSize:{xs:'30px',md:'50px'}}}>About Us</Typography>
         {filteredData.map((item) => (
-        <Box sx={{width:{xs:'95%',md:'85%'},display:'flex',flexDirection:{xs:'column',md:'row'},alignItems:'center',justifyItems:'center',gap:'30px'}}>
-        <p style={{textAlign:'left'}}>{item.LabelText}</p>
+        <Box sx={{width:{xs:'90%',md:'85%'},display:'flex',flexDirection:{xs:'column',md:'row'},alignItems:'center',justifyItems:'center',gap:'30px'}}>
+        <p style={{textAlign:'justify'}}>{item.LabelText}</p>
         <Avatar src={item.link} 
         sx={{width:{xs:'150px',md:'120px'},height:{xs:'150px',md:'120px'},justifyContent:'center',alignItems:'center'}}/>
         </Box>

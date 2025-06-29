@@ -49,22 +49,7 @@ export const BodyOne = () => {
     handleClose();
   };
 
-  // Handle loading and error
-  if (isLoading) {
-    return (
-      <Container>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch data.</Typography>
-      </Container>
-    );
-  }
+  
 
   const filteredData1 = data.filter((item) => item.Id === 7);
   const filteredData2 = data.filter((item) => item.Id === 8);

@@ -3,10 +3,9 @@ import React, { useState }  from 'react'
 import { Drawer, Box, Button, AppBar, Toolbar, Typography, IconButton, ButtonGroup, Container, CircularProgress} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import HomeIcon from '@mui/icons-material/Home';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -72,50 +71,7 @@ export const Navbar = () => {
 
   
   const [isClicked, setIsClicked] = useState(false);
-  const scrollToTopicAbout = () => {
-    setIsClicked(true); // Toggle click state <a>
-    // Find the target section by ID and scroll to it
-    const targetSection = document.getElementById("about");
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth', // Smooth scroll
-        block: 'start',     // Align to the top of the section
-      });
-    }
-  };
-  const scrollToTopicPackages = () => {
-    setIsClicked(true); // Toggle click state <a>
-    // Find the target section by ID and scroll to it
-    const targetSection = document.getElementById("packages");
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth', // Smooth scroll
-        block: 'start',     // Align to the top of the section
-      });
-    }
-  };
-  const scrollToTopicServices = () => {
-    setIsClicked(true); // Toggle click state <a>
-    // Find the target section by ID and scroll to it
-    const targetSection = document.getElementById("services");
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth', // Smooth scroll
-        block: 'start',     // Align to the top of the section
-      });
-    }
-  };
-  const scrollToTopicContact = () => {
-    setIsClicked(true); // Toggle click state <a>
-    // Find the target section by ID and scroll to it
-    const targetSection = document.getElementById("contact");
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth', // Smooth scroll
-        block: 'start',     // Align to the top of the section
-      });
-    }
-  };
+
     
    // State to manage the open/close state of the drawer
      const [open, setOpen] = useState(false);
@@ -134,22 +90,8 @@ export const Navbar = () => {
       behavior: 'smooth',  // Smooth scroll
     });
   };
-  // Handle loading and error
-      if (isLoading) {
-        return (
-          <Container>
-            <CircularProgress />
-          </Container>
-        );
-      }
-    
-      if (error) {
-        return (
-          <Container>
-            <Typography color="error">Failed to fetch data.</Typography>
-          </Container>
-        );
-      }
+  
+  
     
       const filteredData = data.filter((item) => item.Id === 1);
       const filteredData1 = data.filter((item) => item.Id === 12);
@@ -188,7 +130,7 @@ export const Navbar = () => {
           lg: '14%',   
         },
         marginLeft:{
-          xs:'16px',
+          xs:'10px',
           sm:'16px'
         },
         height: 'auto',  
@@ -226,13 +168,13 @@ export const Navbar = () => {
       }}>
         
         
-          <Button  component={Link} to="/"           sx={Style.NavButton}>Home</Button>
-          <Button  component={Link} to="/about"      sx={Style.NavButton}>About</Button>
-          <Button  component={Link} to="/packages"   sx={Style.NavButton}>Packages</Button>
-          <Button  component={Link} to="/contact"    sx={Style.NavButton}>Contact</Button>
-          <Button  component={Link} to="/payment"    sx={Style.NavButton}>Payment</Button>
+          <Button onClick={handleScrollUp} component={Link} to="/"           sx={Style.NavButton}>Home</Button>
+          <Button onClick={handleScrollUp} component={Link} to="/about"      sx={Style.NavButton}>About</Button>
+          <Button onClick={handleScrollUp} component={Link} to="/packages"   sx={Style.NavButton}>Packages</Button>
+          <Button onClick={handleScrollUp} component={Link} to="/contact"    sx={Style.NavButton}>Contact</Button>
+          <Button onClick={handleScrollUp} component={Link} to="/payment"    sx={Style.NavButton}>Payment</Button>
           {filteredData1.map((item) => (
-          <Button  href={`tel:91${item.Phone}`} sx={{backgroundColor:'green', color:'white',display:{xs:'none',md:'flex'},'&:hover':{backgroundColor:'#FF6200'}}}> <LocalPhoneIcon/> </Button>
+          <Button  href={`tel:+91${item.Phone}`} sx={{backgroundColor:'green', color:'white',display:{xs:'none',md:'flex'},'&:hover':{backgroundColor:'#FF6200'}}}> <LocalPhoneIcon/> </Button>
             ))}
     <IconButton 
     sx={{
@@ -283,20 +225,20 @@ export const Navbar = () => {
 
           {/* Drawer Content */}
           <Button component={Link} to="/"  
-          variant="h6" sx={{
+          variant="h6" onClick={handleScrollUp} sx={{
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Home</Button>
           <Button component={Link} to="/about"            
-          variant="h6" sx={{
+          variant="h6" onClick={handleScrollUp} sx={{
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>About</Button>
 
           <Button component={Link} to="/packages"
-           variant="h6" sx={{
+           variant="h6" onClick={handleScrollUp} sx={{
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Packages</Button>
           <Button component={Link} to="/contact"
-           variant="h6" sx={{
+           variant="h6" onClick={handleScrollUp} sx={{
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Contact</Button>
           <Button component={Link} to="/payment"
-           variant="h6" sx={{
+           variant="h6" onClick={handleScrollUp} sx={{
                                 color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Payment</Button>
 
           
@@ -338,11 +280,30 @@ export const Navbar = () => {
               backgroundColor:'#482e7a',
               }}>
 
-                <ButtonGroup sx={{width:'100%',height:'50px'}}>
-                <Button href="tel:9788112233" sx={{width:'50%',backgroundColor:'#FF6200',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>Request a Call</Button>
-                <Button onClick={handleScrollUp} 
-                sx={{width:'50%',backgroundColor:'#322826',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>
-                  Back to Home</Button>
+                <ButtonGroup  
+                disableElevation 
+                sx={{width:'100%',height:'50px',backgroundColor:'#322826',
+                  '& .MuiButtonGroup-grouped': {
+                    border: 'none !important',     // Remove button borders
+                    },
+                }}>
+                  {filteredData1.map((item) => (
+                <Button href={`tel:+91${item.Phone}`} sx={{width:'50%',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>
+                  <LocalPhoneIcon/>
+                </Button>
+                ))}
+                <Button component={Link} to="/"
+                onClick={handleScrollUp} 
+                sx={{width:'50%',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>
+                  <HomeIcon/></Button>
+                  <Button component={Link} to="payment"
+                onClick={handleScrollUp} 
+                sx={{width:'50%',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>
+                  <CurrencyRupeeIcon/></Button>
+                <Button 
+                onClick={handleScrollUp} 
+                sx={{width:'50%',fontSize:'13px',fontWeight:'500',textTransform:'none',color:'white'}}>
+                  <KeyboardDoubleArrowUpIcon/></Button>
                 </ButtonGroup>
 
     </Box>

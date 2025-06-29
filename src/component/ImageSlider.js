@@ -46,24 +46,6 @@ const ImageSlider = () => {
     );
   };
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <Container>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
-  // Error state
-  if (error || filteredData.length === 0) {
-    return (
-      <Container>
-        <Typography color="error">Failed to fetch or no data available.</Typography>
-      </Container>
-    );
-  }
-
   return (
     <Box id="banner" sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box

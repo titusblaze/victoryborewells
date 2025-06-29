@@ -6,6 +6,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import ShareIcon from '@mui/icons-material/Share';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -45,7 +46,7 @@ function Example2() {
     e.preventDefault();
     const { name, mobile, email, message } = formData;
     const subject = encodeURIComponent(`Message from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const body = encodeURIComponent(`Name: ${name}\nMobile: ${mobile}\nEmail: ${email}\nMessage: ${message}`);
     window.location.href = `mailto:${filteredItem?.Email}?subject=${subject}&body=${body}`
     emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
       .then(() => {
@@ -62,26 +63,41 @@ function Example2() {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
-
-  // Handle loading and error
-    if (isLoading) {
-      return (
-        <Container>
-          <CircularProgress />
-        </Container>
-      );
-    }
   
-    if (error) {
-      return (
-        <Container>
-          <Typography color="error">Failed to fetch data.</Typography>
-        </Container>
-      );
-    }
+
+
+  
   
     const filteredData1 = data.filter((item) => item.Id === 9);
     const filteredData2 = data.filter((item) => item.Id === 10);
+    const filteredData4 = data.filter((item) => item.Id === 11);
+
+
+
+    
+    const handleShare = async (data) => {
+  const message = `
+🏢 ${data.LabelText}
+📝 ${data.LabelText1}
+
+📞 +91 ${data.Phone}
+📧 ${data.Email}
+📍 ${data.LabelText2}
+🌐 ${data.Location}
+  `;
+  if (!navigator.share) {
+    alert('Share not supported on this browser');
+    return;
+  }
+  try {
+    await navigator.share({
+      title: data.LabelText,
+      text: message,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   
   return (
@@ -92,24 +108,24 @@ function Example2() {
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
-        padding:'110px 0'
+        padding:'110px 0px 30px 0'
       }}> 
       
       <Box sx={{width:{xs:'90%',md:'85%'}}}>
       <Typography variant="h5" gutterBottom sx={{fontSize:'30px',fontWeight:'bold',color:'#333232', padding:'20px 0'}}> 
         Contact Us
       </Typography>
+      {filteredData4.map((item) => (
       <Typography sx={{fontSize:'20px',textAlign:'left', padding:'20px 0'}}>
-       We’d love to hear from you!
-      Whether you have a question, need support, or just want to say hello, 
-      our team is here to help. Please use the information below to get in touch with us.
+       {item.Paragraph}
         </Typography>
+        ))}
     </Box>
       
         {/* Contact Person Card */}
         <Box sx={{width:'90%',display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'30px',padding:'30px 0px'}}>
         {filteredData1.map((data,index)=>(
-            <Box sx={{width:{xs:'85%',md:'20%'},
+            <Box sx={{width:{xs:'85%',md:'23%'},
                         display:'flex',
                         flexDirection:'column',
                         justifyContent:'center',
@@ -124,7 +140,7 @@ function Example2() {
                 {/* <img style={{width:'100px'}} src={data.image}/> */}
                 <Typography style={{textAlign:'left',fontSize:'20px',fontWeight:'bold',color:'#333232'}}>{data.LabelText}</Typography>
                 <p style={{textAlign:'left',margin:'0px',fontSize:'18px'}}> {data.LabelText1}</p>
-                <p style={{textAlign:'left',margin:'0px',fontSize:'18px'}}> {data.LabelTect2}</p>
+                <p style={{textAlign:'left',margin:'0px',fontSize:'18px'}}> {data.LabelText2}</p>
                 <p style={{textAlign:'left',margin:'0px',display:'flex',flexDirection:'row',fontSize:'18px', gap:'10px'}}>
                   <Avatar sx={{width:'20px',height:'20px',backgroundColor:'transparent',color:'black'}}>
                     <PhoneIcon sx={{width:'18px', marginTop:'5px'}}/>
@@ -133,7 +149,7 @@ function Example2() {
                   <Avatar sx={{width:'20px',height:'20px',backgroundColor:'transparent',color:'black'}}>
                     <MailIcon sx={{width:'18px', marginTop:'5px'}}/>
                     </Avatar> {data.Email}</p>
-                <Button href={`tel:91${data.Phone}`}
+                <Button href={`tel:+91${data.Phone}`}
                         sx={{
                             display:'flex',marginTop:'26px',justifyContent:'left',textDecoration:'none',fontWeight:'700',gap:'5px',color:'#333232',
                             '&:hover':{textDecoration:'underline',color:'#FF6200',backgroundColor:'transparent'}
@@ -154,51 +170,90 @@ function Example2() {
               <Box sx={{width:{xs:'95%',md:'60%'},display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', padding:'20px 0'}}>
 
                 <Typography sx={{fontSize:'30px', fontWeight:'bold',padding:'50px 0'}}>Branch Contact Detail</Typography>
-                <Box sx={{width:{xs:'90%',md:'95%'},display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center',gap:'30px'}}>
-            {filteredData2.map((data,index) => ( 
-          <Box sx={{width:{xs:'85%',md:'40%'},display:'flex',flexDirection:'column', border:'solid 1px grey',padding:'20px',borderRadius:'20px'}}> 
-            <Box sx={{width:'100%',display:'flex',flexDirection:'column'}}>
-            <Typography sx={{fontSize:'20px', fontWeight:'bold',textAlign:'left'}}>{data.LableText}</Typography>
-          <Typography sx={{fontSize:'15px',textAlign:'left'}}>{data.LabelText1}</Typography>
+                <Box
+      sx={{
+        width: { xs: '90%', md: '95%' },
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '30px',
+      }}
+    >
+      {filteredData2.map((data, index) => (
+        <Box
+          key={index}
+          sx={{
+            width: { xs: '85%', md: '40%' },
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '20px',
+            borderRadius: '20px',
+            boxShadow: 3,
+            position: 'relative',
+          }}
+        >
+          {/* Share Button at top right */}
           
-        <Box sx={{display:'flex',flexDirection:'row'}}>
-        <IconButton href="tel:+919788112233" color="black">
-          <PhoneIcon sx={{color:'black'}}/>
-        </IconButton>
-        <Link href={`tel:91${data.Phone}`} style={{marginTop:'9px', color:'black'}}>
-          +91 {data.Phone}
-        </Link>
-        </Box>
-        <Box sx={{display:'flex',flexDirection:'row'}}>
-          <IconButton href="mailto:info@example.com">
-          <MailIcon sx={{color:'black'}}/>
-        </IconButton>
-        <Link href="mailto:info@example.com" style={{ marginTop:'9px', color:'black'}}>
-          info@example.com
-        </Link>
-        </Box>
-        <Box sx={{display:'flex',flexDirection:'row',justifyContent:'left'}}>
           <IconButton
-          href={`${data.Email}`}
-          target="_blank"
-          
-        >
-          <LocationOnIcon sx={{color:'black'}}/>
-        </IconButton>
-        <Link
-          href={`${data.Location}`}
-          target="_blank"
-          style={{ color:'black', textAlign:'left' }}
-        >
-          {data.LabelText2}
-        </Link>
+            onClick={() => handleShare(data)}
+            sx={{ position: 'absolute', top: 10, right: 10 }}
+          >
+            <ShareIcon />
+          </IconButton>
 
+          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Typography sx={{ fontSize: '20px', fontWeight: 'bold', textAlign: 'left' }}>
+              {data.LabelText}
+            </Typography>
+            <Typography sx={{ fontSize: '15px', textAlign: 'left' }}>
+              {data.LabelText1}
+            </Typography>
+
+            {/* Phone */}
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <IconButton href={`tel:+91${data.Phone}`}>
+                <PhoneIcon sx={{ color: 'black' }} />
+              </IconButton>
+              <Link
+                href={`tel:+91${data.Phone}`}
+                style={{ mt: '6px', color: 'black', textDecoration: 'none' }}
+              >
+                +91 {data.Phone}
+              </Link>
+            </Box>
+
+            {/* Email */}
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <IconButton href={`mailto:${data.Email}`}>
+                <MailIcon sx={{ color: 'black' }} />
+              </IconButton>
+              <Link
+                href={`mailto:${data.Email}`}
+                style={{ mt: '6px', color: 'black', textDecoration: 'none' }}
+              >
+                {data.Email}
+              </Link>
+            </Box>
+
+            {/* Location */}
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <IconButton href={data.Location} target="_blank">
+                <LocationOnIcon sx={{ color: 'black' }} />
+              </IconButton>
+              <Link
+                href={data.Location}
+                target="_blank"
+                style={{ color: 'black', textDecoration: 'none', textAlign:'left' }}
+              >
+                {data.LabelText2}
+              </Link>
+            </Box>
+          </Box>
         </Box>
-        </Box>
-      </Box>
-        ))}
-        </Box>
-      <Typography sx={{fontSize:'20px',fontStyle:'italic'}}>Thank you for reaching out to us!</Typography>
+      ))}
+    </Box>
+      <Typography sx={{fontSize:'20px',fontStyle:'italic',padding:'10px'}}>Thank you for reaching out to us!</Typography>
 
               </Box>
               {/* Contact FOrm */}

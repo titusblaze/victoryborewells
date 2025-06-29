@@ -19,22 +19,7 @@ export const Body2 = () => {
     const filteredItem = data.find((item) => item.Id === 17);
     const imageUrl = filteredItem?.link;
     const filteredData1 = data.filter((item) => item.Id === 18);
-         // Handle loading and error
-      if (isLoading) {
-        return (
-          <Container>
-            <CircularProgress />
-          </Container>
-        );
-      }
-    
-      if (error) {
-        return (
-          <Container>
-            <Typography color="error">Failed to fetch data.</Typography>
-          </Container>
-        );
-      }
+         
     
   return (
     
@@ -70,7 +55,7 @@ export const Body2 = () => {
         {filteredData.map((item) => (
 
             <Box key={filteredData}
-            sx={{width:'100%',display:{xs:'none',md:'block'}}}>
+            sx={{width:'100%',display:{xs:'none',md:'block'}, flexDirection:{xs:'column'}}}>
             
                 <p style={{ textAlign:'left',
                             fontSize:'23px',
@@ -83,12 +68,9 @@ export const Body2 = () => {
                             }}>
                             {item.Paragraph}
                             </p>
-            
-                
-                    
-
             </Box>
              ))}
+             
         </Box>
                        
         <Box
@@ -100,7 +82,7 @@ export const Body2 = () => {
             
         }}>
             {filteredData.map((item) => (
-            <p style={{textAlign:'left',margin:'0px'}}>{item.Paragraph2}</p>
+            <p style={{textAlign:'justify',margin:'0px'}}>{item.Paragraph2}</p>
                 ))}
 
                 <Box sx={{width:'100%',display:'flex',flexWrap:'wrap',paddingTop:'30px',gap:'20px',justifyContent:'center'}}>
