@@ -152,7 +152,7 @@ function Example2() {
                 <Button href={`tel:+91${data.Phone}`}
                         sx={{
                             display:'flex',marginTop:'26px',justifyContent:'left',textDecoration:'none',fontWeight:'700',gap:'5px',color:'#333232',
-                            '&:hover':{textDecoration:'underline',color:'#FF6200',backgroundColor:'transparent'}
+                            '&:hover':{textDecoration:'none',color:'#FF6200',backgroundColor:'transparent'}
                         }}>
                             <Avatar 
                             sx={{width:'20px',height:'20px',backgroundColor:'#333232','&:hover':{backgroundColor:'#FF6200'}}}>
@@ -212,42 +212,42 @@ function Example2() {
 
             {/* Phone */}
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <IconButton href={`tel:+91${data.Phone}`}>
+              <Button href={`tel:+91${data.Phone}`}
+              sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'black',
+              '&:hover': {
+              backgroundColor: 'transparent', // same as normal to disable hover change
+              boxShadow: 'none',
+            },}}>
                 <PhoneIcon sx={{ color: 'black' }} />
-              </IconButton>
-              <Link
-                href={`tel:+91${data.Phone}`}
-                style={{ mt: '6px', color: 'black', textDecoration: 'none' }}
-              >
-                +91 {data.Phone}
-              </Link>
+                 +91 {data.Phone}
+              </Button>
             </Box>
 
             {/* Email */}
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <IconButton href={`mailto:${data.Email}`}>
+              <Button href={`mailto:${data.Email}`}
+              sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'black',
+              '&:hover': {
+              backgroundColor: 'transparent', // same as normal to disable hover change
+              boxShadow: 'none',
+            },}}>
                 <MailIcon sx={{ color: 'black' }} />
-              </IconButton>
-              <Link
-                href={`mailto:${data.Email}`}
-                style={{ mt: '6px', color: 'black', textDecoration: 'none' }}
-              >
                 {data.Email}
-              </Link>
+              </Button>
+              
             </Box>
 
             {/* Location */}
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <IconButton href={data.Location} target="_blank">
+              <Button href={data.Location} target="_blank"
+              sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'black',
+              '&:hover': {
+              backgroundColor: 'transparent', // same as normal to disable hover change
+              boxShadow: 'none',
+            },}}>
                 <LocationOnIcon sx={{ color: 'black' }} />
-              </IconButton>
-              <Link
-                href={data.Location}
-                target="_blank"
-                style={{ color: 'black', textDecoration: 'none', textAlign:'left' }}
-              >
                 {data.LabelText2}
-              </Link>
+              </Button>
             </Box>
           </Box>
         </Box>

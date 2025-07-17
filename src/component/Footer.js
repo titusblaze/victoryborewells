@@ -89,36 +89,42 @@ const Footer = () => {
       <Box sx={{width:{xs:'90%',md:'30%'},display:'flex',flexDirection:'column'}}>
         <Typography sx={{textAlign:'left',fontWeight:'bold',color:'white',fontSize:'20px'}}>Head Office</Typography>
         <Box sx={{display:'flex',flexDirection:'row'}}>
-        <IconButton href={`tel:+91${item.Phone}`} color="white">
+        <Button href={`tel:+91${item.Phone}`} 
+        sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'white',
+          '&:hover': {
+          backgroundColor: 'transparent', // same as normal to disable hover change
+          boxShadow: 'none',
+        },}}>
           <PhoneIcon sx={{color:'white'}}/>
-        </IconButton>
-        <Link href={`tel:+91${item.Phone}`} style={{marginTop:'9px', color:'white', textDecoration:'none'}}>
           +91 {item.Phone}
-        </Link>
+        </Button>
+        
         </Box>
         <Box sx={{display:'flex',flexDirection:'row'}}>
-          <IconButton href={`mailto:${item.Email}`}>
+          <Button href={`mailto:${item.Email}`}
+          sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'white',
+          '&:hover': {
+          backgroundColor: 'transparent', // same as normal to disable hover change
+          boxShadow: 'none',
+        },}}>
           <EmailIcon sx={{color:'white'}}/>
-        </IconButton>
-        <Link href={`mailto:${item.Email}`} style={{ marginTop:'6px', color:'white', textDecoration:'none'}}>
           {item.Email}
-        </Link>
+        </Button>
         </Box>
         <Box sx={{display:'flex',flexDirection:'row'}}>
-          <IconButton
+          <Button
           href={item.Location}
           target="_blank"
-          
-        >
+          sx={{textTransform:'none',textAlign:'left', gap:'10px', color:'white',
+          '&:hover': {
+          backgroundColor: 'transparent', // same as normal to disable hover change
+          boxShadow: 'none',
+        },}}>
           <LocationOnIcon sx={{color:'white'}}/>
-        </IconButton>
-        <Link
-          href={item.Location}
-          target="_blank"
-          style={{ color:'white', textAlign:'left' , textDecoration:'none'}}
-        >
           {item.LabelText2}
-        </Link>
+
+        </Button>
+        
 
         </Box>
       </Box>
@@ -146,7 +152,7 @@ const Footer = () => {
       </Box>
     </Box>
     <Box sx={{width:'100%',height:{sm:'70px',md:'50px'},display:'flex',backgroundColor:'#322826',justifyContent:'center',alignItems:'center',marginBottom:{xs:'45px',sm:'45px',md:'0px'}}}>
-        <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',color:'white',fontSize:{xs:'13px'}}}>Copyright © 2025 Victory Borewells. All Rights Reserved.</Typography>
+        <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',color:'white',padding:'5px 0',fontSize:{xs:'13px'}}}>Copyright © 2025 Victory Borewells. All Rights Reserved.</Typography>
         
         </Box>
       </Box>

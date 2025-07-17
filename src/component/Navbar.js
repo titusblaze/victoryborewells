@@ -70,6 +70,7 @@ export const Navbar = () => {
   }
 
   
+  
   const [isClicked, setIsClicked] = useState(false);
 
     
@@ -89,6 +90,8 @@ export const Navbar = () => {
       left: 0,
       behavior: 'smooth',  // Smooth scroll
     });
+    // Close the drawer
+    setOpen(false);
   };
   
   
@@ -124,10 +127,10 @@ export const Navbar = () => {
                 }}>
           <Box sx={{
          width: {
-          xs: '40%',  
-          sm: '40%',   
-          md: '14%',   
-          lg: '14%',   
+          xs: '60%',  
+          sm: '60%',   
+          md: '25%',   
+          lg: '25%',   
         },
         marginLeft:{
           xs:'10px',
@@ -138,7 +141,7 @@ export const Navbar = () => {
         justifyContent:'left',
         alignItems:'center'
       }}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none' , display:'flex',justifyContent:'center',alignItems:'center', gap:'10px'}}>
            <Box
                 component="img"
                 src={logo}
@@ -149,16 +152,17 @@ export const Navbar = () => {
                   p: { xs: '10px' },         // Responsive padding
                 }}
               />
+              <Typography sx={{color:{xs:'#FF6200', md:'white'}}}>Victory Borewells</Typography>
               </Link>
         </Box>
         
 
         <Box sx={{
          width: {
-          xs: '50%',  
-          sm: '50%',   
-          md: '80%',   
-          lg: '80%',   
+          xs: '30%',  
+          sm: '30%',   
+          md: '75%',   
+          lg: '75%',   
         },
         height: 'auto',  
         display: 'flex',
@@ -225,21 +229,25 @@ export const Navbar = () => {
 
           {/* Drawer Content */}
           <Button component={Link} to="/"  
-          variant="h6" onClick={handleScrollUp} sx={{
-                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Home</Button>
+          variant="h6" 
+          onClick={handleScrollUp}
+          sx={{width:'95%',color:'#FF6200',justifyContent: 'flex-start','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Home</Button>
           <Button component={Link} to="/about"            
-          variant="h6" onClick={handleScrollUp} sx={{
-                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>About</Button>
+          variant="h6" 
+          onClick={handleScrollUp} 
+          sx={{width:'95%',color:'#FF6200',justifyContent: 'flex-start','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>About</Button>
 
           <Button component={Link} to="/packages"
-           variant="h6" onClick={handleScrollUp} sx={{
-                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Packages</Button>
+           variant="h6" 
+           onClick={handleScrollUp} 
+           sx={{width:'95%',color:'#FF6200',justifyContent: 'flex-start','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Packages</Button>
           <Button component={Link} to="/contact"
-           variant="h6" onClick={handleScrollUp} sx={{
-                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Contact</Button>
+           variant="h6" onClick={handleScrollUp} 
+           sx={{width:'95%',color:'#FF6200',justifyContent: 'flex-start','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Contact</Button>
           <Button component={Link} to="/payment"
-           variant="h6" onClick={handleScrollUp} sx={{
-                                color:'#FF6200','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Payment</Button>
+           variant="h6" 
+           onClick={handleScrollUp}
+           sx={{width:'95%',color:'#FF6200',justifyContent: 'flex-start','&:hover':{color:'#d5a98e',backgroundColor:'transparent'}}}>Payment</Button>
 
           
           <Box sx={{display:'flex',flexWrap:'wrap', alignItems:'center',gap:'10px', borderTop:'2px solid #FF6200',paddingTop:'30px'}}>
