@@ -146,30 +146,47 @@ const Gallery = () => {
         </Box>
       </Modal>
     </>
-            {filteredData2.map((Link) => (
-    
-        <Typography sx={{ display : Link.LabelText === 'yes' ? 'flex' : 'none' ,fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Live Video</Typography>
+            {filteredData2
+                .filter(link => link?.LabelText?.toLowerCase() === 'yes')
+                .map((link, index) => (
+                  <React.Fragment key={index}>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: '20px', md: '30px' },
+                        padding: '15px 0',
+                        fontWeight: 'bold',
+                        color: '#322826',
+                        textAlign: 'left',
+                      }}
+                    >
+                      Live Video
+                    </Typography>
 
-                            ))}
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        width: { xs: '360px', md: '1385px' },
+                        height: { xs: '200px', md: '768px' },
+                      }}
+                    >
+                      <iframe
+                        src={`https://www.youtube.com/embed/${link.link}`}
+                        title={link.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{
+                          position: 'relative',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                        }}
+                      />
+                    </Box>
+                  </React.Fragment>
+              ))}
 
-        {filteredData2.map((Link) => (
-        <Box sx={{display : Link.LabelText === 'yes' ? 'flex' : 'none' , width:{xs:'360px',md:'1385px'},height:{xs:'200px',md:'768px'}}}>
-            <iframe
-                          src={`https://www.youtube.com/embed/${Link.link}`}
-                          title={Link.title}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          style={{
-                            position: 'relative',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                          }}
-                        />
-                            </Box>
-                            ))}
 
                         
                 <Typography sx={{fontSize:{xs:'20px',md:'30px'},padding:'15px 0',fontWeight:'bold',color:'#322826',textAlign:'left'}}>Experience Video</Typography>
