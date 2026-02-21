@@ -106,6 +106,9 @@ export const Navbar = () => {
       flexDirection:'column',
       position:'fixed',
       zIndex:'999',
+      top:0,
+      left:0,
+      height:'202px',
       //background:{md:'rgba(253, 250, 250, 0.5)'},
       
       }}>

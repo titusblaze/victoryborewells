@@ -17,7 +17,7 @@ import Payment from './component/Payment';
 import Advertisement from './component/Advertisement';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material';
 
 const fetchData = async () => {
   const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
@@ -42,7 +42,66 @@ function App() {
         alignItems: 'center',        // Center vertically
       }}
     >
-      <CircularProgress />
+      <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#111",   // dark theme background
+      }}
+    >
+      {/* Logo */}
+      <img
+        src="/logo512.png"   // place your logo inside public folder
+        alt="logo"
+        style={{
+          width: "120px",
+          marginBottom: "20px",
+          animation: "pulse 2s infinite",
+        }}
+      />
+
+      {/* Text */}
+      <Typography
+        sx={{
+          color: "#fff",
+          letterSpacing: 2,
+          marginBottom: 2,
+          fontWeight: 500,
+        }}
+      >
+        Loading...
+      </Typography>
+
+      {/* Progress Bar */}
+      <Box sx={{ width: "220px" }}>
+        <LinearProgress
+          sx={{
+            height: 8,
+            borderRadius: 5,
+            backgroundColor: "#333",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "#ff7a00", // orange theme
+            },
+          }}
+        />
+      </Box>
+
+      {/* Animation */}
+      <style>
+        {`
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 0.7; }
+          50% { transform: scale(1.08); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.7; }
+        }
+        `}
+      </style>
+    </Box>
+  
     </Box>
         );
       }

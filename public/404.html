@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+  sessionStorage.redirect = location.pathname;
+</script>
+<meta http-equiv="refresh" content="0;URL='/'" />
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -26,15 +30,6 @@
     -->
     <title>Victory Borewells</title>
   </head>
-  <script>
-(function () {
-  var redirect = sessionStorage.redirect;
-  if (redirect) {
-    sessionStorage.removeItem("redirect");
-    window.history.replaceState(null, null, redirect);
-  }
-})();
-</script>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
