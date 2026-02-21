@@ -3,20 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'; // ✅ Import BrowserRouter
+
+import { HashRouter } from 'react-router-dom';   // ✅ CHANGE HERE
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient(); // Create a new query client
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <QueryClientProvider client={queryClient}>
-  <React.StrictMode>
-    <BrowserRouter>         {/* ✅ Wrap App with BrowserRouter */}
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+      <HashRouter>     {/* ✅ CHANGE HERE */}
+        <App />
+      </HashRouter>
+    </React.StrictMode>
   </QueryClientProvider>
 );
+
+reportWebVitals();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
