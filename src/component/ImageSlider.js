@@ -80,8 +80,8 @@ const ImageSlider = () => {
       `Area: ${area}%0A` +
       `Mobile: ${mobile}%0A` +
       `Message: ${message}`;
-
-    const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${text}`;
+    const phoneNumber = `+91${whatsappPhone}`; // Your WhatsApp number (with country code)
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
 
     window.open(whatsappUrl, '_blank');
 
