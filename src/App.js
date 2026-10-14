@@ -1,145 +1,188 @@
-import logo from './logo.svg';
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import { Navbar } from './component/Navbar';
-import Home from './component/Home';
-import { Body2 } from './component/Body2';
-import { BodyOne } from './component/BodyOne';
-import Footer from './component/Footer';
-import ScrollupIcon from './component/ScrollupIcon';
-import Example2 from './component/Example2';
-import AboutUs from './component/AboutUs';
-import AutoNumberRunning from './AutoNumberRunning';
-import ImageSlider from './component/ImageSlider';
-import Gallery from './component/Gallery';
-import GoogleReview from './component/GoogleReview';
-import Payment from './component/Payment';
-import Advertisement from './component/Advertisement';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material';
+import "./App.css";
 
-const fetchData = async () => {
-  const response = await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhxd7XRVy-MzKG-x9ojNaxrFggy_y4EUmBweTwo2wziH2cQwKYYfC46AZ4vHBJhmycN1xTERzXBS6ImTtQCX06HTxjitYquDuesLq3VvGcaGb-OgS64_Bj0BcfRaoC4Xm8imja1eA9JYq9wrf6tx_9sGVkPZg3Mg7bXwgHleWcgvkDowYqe65Rm8jK2Kpmb-n4zxiXdzlswrar2iXq6XYDZT9TqRT3Ljf9rKccA3x8F6I5OvGjkCfOz95syYBTrnK2_wnbIxT-v3S5foiOxfCkkXEO04g&lib=MEe6XMuUhqeW3L9OXUTf2CPFnlO6455Uk');
-  return response.data;
-};
+import { Routes, Route } from "react-router-dom";
 
+import { Navbar } from "./component/Navbar";
+import Home from "./component/Home";
+import { BodyOne } from "./component/BodyOne";
+import Footer from "./component/Footer";
+import ScrollupIcon from "./component/ScrollupIcon";
+import Example2 from "./component/Example2";
+import AboutUs from "./component/AboutUs";
+import Payment from "./component/Payment";
+import Advertisement from "./component/Advertisement";
 
+import { useQuery } from "@tanstack/react-query";
+
+import {
+  Box,
+  LinearProgress,
+  Typography,
+  Button,
+} from "@mui/material";
+
+// Shared Google Apps Script JSONP function
+import fetchVictoryData from "./component/fetchVictoryData"
 
 function App() {
-  const { data = [], isLoading, error } = useQuery({
-      queryKey: ['victoryborewellData'],
-      queryFn: fetchData,
-      staleTime: 1000 * 60 * 5, // cache for 5 minutes
-    });
-   if (isLoading) {
-        return (
-          <Box
-      sx={{
-        height: '100vh',             // Full viewport height
-        display: 'flex',
-        justifyContent: 'center',    // Center horizontally
-        alignItems: 'center',        // Center vertically
-      }}
-    >
-      <Box
-      sx={{
-        height: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#111",   // dark theme background
-      }}
-    >
-      {/* Logo */}
-      <img
-        src="/logo512.png"   // place your logo inside public folder
-        alt="logo"
-        style={{
-          width: "120px",
-          marginBottom: "20px",
-          animation: "pulse 2s infinite",
-        }}
-      />
+  const {
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["victoryborewellData"],
+    queryFn: fetchVictoryData,
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
 
-      {/* Text */}
-      <Typography
+  // Loading screen
+  if (isLoading) {
+    return (
+      <Box
         sx={{
-          color: "#fff",
-          letterSpacing: 2,
-          marginBottom: 2,
-          fontWeight: 500,
+          minHeight: "100vh",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "#111",
         }}
       >
-        Loading...
-      </Typography>
-
-      {/* Progress Bar */}
-      <Box sx={{ width: "220px" }}>
-        <LinearProgress
+        {/* Logo */}
+        <Box
+          component="img"
+          src="/logo512.png"
+          alt="Victory Borewells"
           sx={{
-            height: 8,
-            borderRadius: 5,
-            backgroundColor: "#333",
-            "& .MuiLinearProgress-bar": {
-              backgroundColor: "#ff7a00", // orange theme
+            width: { xs: 100, sm: 120 },
+            height: "auto",
+            mb: 2.5,
+            animation: "victoryPulse 2s infinite",
+            "@keyframes victoryPulse": {
+              "0%": {
+                transform: "scale(1)",
+                opacity: 0.7,
+              },
+              "50%": {
+                transform: "scale(1.08)",
+                opacity: 1,
+              },
+              "100%": {
+                transform: "scale(1)",
+                opacity: 0.7,
+              },
             },
           }}
         />
-      </Box>
 
-      {/* Animation */}
-      <style>
-        {`
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 0.7; }
-          50% { transform: scale(1.08); opacity: 1; }
-          100% { transform: scale(1); opacity: 0.7; }
-        }
-        `}
-      </style>
-    </Box>
-  
-    </Box>
-        );
-      }
-    
-      if (error) {
-        return (
-          <Box
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Typography color="error">Failed to fetch data.</Typography>
-    </Box>
-        );
-      }
+        {/* Loading text */}
+        <Typography
+          sx={{
+            color: "#fff",
+            letterSpacing: 2,
+            mb: 2,
+            fontWeight: 500,
+          }}
+        >
+          Loading...
+        </Typography>
+
+        {/* Progress bar */}
+        <Box sx={{ width: "220px", maxWidth: "80%" }}>
+          <LinearProgress
+            sx={{
+              height: 8,
+              borderRadius: 5,
+              backgroundColor: "#333",
+              "& .MuiLinearProgress-bar": {
+                backgroundColor: "#ff7a00",
+              },
+            }}
+          />
+        </Box>
+      </Box>
+    );
+  }
+
+  // API error screen
+  if (isError) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          width: "100%",
+          px: 2,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          backgroundColor: "#111",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            color: "#ff7a00",
+            fontWeight: 700,
+            mb: 1,
+          }}
+        >
+          Unable to load website data
+        </Typography>
+
+        <Typography
+          sx={{
+            color: "#ddd",
+            mb: 2,
+            maxWidth: 500,
+            overflowWrap: "anywhere",
+          }}
+        >
+          {error?.message ||
+            "Please check your internet connection and try again."}
+        </Typography>
+
+        <Button
+          variant="contained"
+          onClick={() => refetch()}
+          sx={{
+            backgroundColor: "#ff7a00",
+            color: "#111",
+            fontWeight: 700,
+            px: 4,
+            "&:hover": {
+              backgroundColor: "#ff9633",
+            },
+          }}
+        >
+          Retry
+        </Button>
+      </Box>
+    );
+  }
+
+  // Website
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
+
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/about" element={<AboutUs/>} />
-        <Route path="/packages" element={<BodyOne/>} />
-        <Route path="/contact" element={<Example2/>} />
-        <Route path="/payment" element={<Payment/>} />
-      </Routes> 
-      <Advertisement/>
-      <ScrollupIcon/>
-      <Footer/>
-      
-      
-      
-      
-      
-      
-      
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/packages" element={<BodyOne />} />
+        <Route path="/contact" element={<Example2 />} />
+        <Route path="/payment" element={<Payment />} />
+      </Routes>
+
+      <Advertisement />
+
+      <ScrollupIcon />
+
+      <Footer />
     </div>
   );
 }
